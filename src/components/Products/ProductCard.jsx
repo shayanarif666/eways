@@ -19,12 +19,9 @@ function ProductCard({ product, discountPrice }) {
                             <small>-{product.discountPercentage.toFixed(2)}%</small>
                         </div>
                     </div>
-                    <CardContent>
-                        <p>
-                            {product.description.slice(0, 35)}....
-                        </p>
-                    </CardContent>
-
+                    <p>
+                        {product.description.slice(0, 35)}....
+                    </p>
                     <h6>Rs. {discountPrice(product.price, product.discountPercentage).toFixed(2)}</h6>
                     {
                         product.discountPercentage ?
