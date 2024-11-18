@@ -8,7 +8,7 @@ import "./navbar.css";
 
 function Navbar() {
     return (
-        <nav className='navbar bg-red-600 py-4' id='navbar' style={{ maxHeight: "13vh" }}>
+        <nav className='navbar bg-red-600 pt-4' id='navbar'>
             <div className="container-fluid d-block">
                 <div className="row flex items-center" style={{ marginTop: "-2.3rem" }}>
                     <div className="logo-area col-lg-2 col-xl-2 col-4 order-1">
