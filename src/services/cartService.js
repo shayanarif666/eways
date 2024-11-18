@@ -4,7 +4,7 @@ export class CartService {
     // Get Carts
     async getCarts() {
         try {
-            const response = await fetch(`/api/carts`);
+            const response = await fetch(`https://dummyjson.com/carts`);
             if (!response.ok) throw new Error("Something went wrong !");
             const carts = await response.json();
             return carts;
@@ -16,7 +16,7 @@ export class CartService {
     // Get Single Cart
     async getCart(id) {
         try {
-            const response = await fetch(`/api/carts/user/${id}`);
+            const response = await fetch(`https://dummyjson.com/carts/user/${id}`);
             if (!response.ok) throw new Error("Something went wrong !");
             const cart = await response.json();
             return cart;
@@ -28,7 +28,7 @@ export class CartService {
     // Add Cart
     async addCart(data, id) {
         try {
-            const response = await fetch(`/api/carts/add`, {
+            const response = await fetch(`https://dummyjson.com/carts/add`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
