@@ -23,9 +23,7 @@ function Products({
     const fetchingData = useCallback(async () => {
         setLoadState(true);
         try {
-            const response = await fetch("https://dummyjson.com/products?limit=100");
-            if (!response.ok) throw new Error("Something went wrong !");
-            const products = await response.json();
+            const { products } = await productService.getProducts();
             const getCategories = await categoryService.getCategories();
             setGProducts(products);
             setGCategories(getCategories);
