@@ -16,7 +16,7 @@ export class ProductService {
     // Get Single Products
     async getProduct(id) {
         try {
-            const response = await fetch(`https://dummyjson.com//products/${id}`);
+            const response = await fetch(`https://dummyjson.com/products/${id}`);
             if (!response.ok) throw new Error("Something went wrong !");
             const product = await response.json();
             return product;
@@ -28,7 +28,7 @@ export class ProductService {
     // Get Search Products
     async getSearchProducts(searchHeadline) {
         try {
-            const response = await fetch(`https://dummyjson.com//products/search?q=${searchHeadline}`);
+            const response = await fetch(`https://dummyjson.com/products/search?q=${searchHeadline}`);
             if (!response.ok) throw new Error("Something went wrong !");
             const products = await response.json();
             return products;
@@ -40,7 +40,7 @@ export class ProductService {
     // Skip & Limit Products
     async getProductsByCategories(category) {
         try {
-            const response = await fetch(`https://dummyjson.com//products/category/${category}`);
+            const response = await fetch(`https://dummyjson.com/products/category/${category}`);
             if (!response.ok) throw new Error("Something went wrong !");
             const products = await response.json();
             return products;
@@ -52,7 +52,7 @@ export class ProductService {
     // Add Product
     async addProduct(data) {
         try {
-            const response = await fetch('https://dummyjson.com//products/add', {
+            const response = await fetch('https://dummyjson.com/products/add', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -68,7 +68,7 @@ export class ProductService {
     // Update Product
     async updateProduct(data, id) {
         try {
-            const response = await fetch(`https://dummyjson.com//products/${id}`, {
+            const response = await fetch(`https://dummyjson.com/products/${id}`, {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(data)
@@ -84,7 +84,7 @@ export class ProductService {
     // Delete Product
     async deleteProduct(id) {
         try {
-            const response = await fetch(`https://dummyjson.com//products/${id}`, {
+            const response = await fetch(`https://dummyjson.com/products/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) throw new Error("Something went wrong !");

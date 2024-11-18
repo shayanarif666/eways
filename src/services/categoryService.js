@@ -4,7 +4,7 @@ export class CategoryService {
     // Get All Categories -- TODO : Research About API METHODS -- Object
     async getCategories() {
         try {
-            const response = await fetch('/api/products/categories');
+            const response = await fetch('https://dummyjson.com/products/categories');
             if (!response.ok) throw new Error("Something went wrong !");
             const categories = await response.json();
             return categories;
