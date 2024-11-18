@@ -1,0 +1,8 @@
+@media (max-width:992px) {
+    #navbar {
+        max-height: 100% !important;
+    }
+    #navbar .logo img {
+        height: 130px !important;
+    }
+}
