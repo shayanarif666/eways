@@ -51,7 +51,7 @@ function Products({
                 <Loading className="m-auto" />
             </div>}
 
-            {gCategories.slice(0, 4).map(({ name, slug }) => (
+            {gCategories?.slice(0, 4).map(({ name, slug }) => (
                 <div key={slug} style={{ marginBottom: '20px' }}>
                     <div className="d-flex align-items-center justify-content-between mb-3">
                         <h4 className='text-2xl text-bold text-gray-500'>{name}</h4>
