@@ -1,0 +1,5 @@
+TODOS: 
+-- Products Placement -- Home Page ** Products.jsx
+-- Category List Icon Handling ** CategoriesList.jsx
+-- Footer Redesign ** Footer.jsx
+-- Pagination Handling

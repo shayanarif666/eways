@@ -1,0 +1,15 @@
+/* 
+####################################
+Carousel Dots Styling
+####################################
+*/
+.carousel .control-dots .dot {
+    width: 10px !important;
+    height: 10px !important;
+    margin: 0 .3rem;
+    border-radius: 50%;
+}
+.carousel .control-dots .dot.selected {
+    box-shadow: none !important;
+    background-color: red !important;
+}

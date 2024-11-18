@@ -1,0 +1,171 @@
+body {
+    background-color: #f7f7f7;
+}
+
+.card-box .MuiPaper-root {
+    border-radius: 0% !important;
+    box-shadow: none !important;
+    border: 1px solid #fff;
+}
+.card-box .MuiPaper-root:hover {
+    border: 1px solid red;
+}
+
+.card-box .css-1qw96cp {
+    padding: 0px !important;
+    width: 100% !important;
+    margin-top: .5rem !important;
+    font-size: .8rem !important;
+    color: #333 !important;
+}
+
+.card-box .css-s18byi {
+    background-color: #fff !important;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px !important;
+    border-radius: 0% !important;
+}
+
+.card-box .card-img {
+    position: relative;
+}
+
+.card-box .card-img svg {
+    position: absolute;
+    top: -6%;
+    right: -2%;
+    color: #666;
+    font-size: 2rem;
+    background-color: #fff;
+    padding: .5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-box .css-bhp9pd-MuiPaper-root-MuiCard-root {
+    border-radius: 0;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #fff;
+}
+
+.card-box .css-1lt5qva-MuiCardContent-root {
+    padding: 0% !important;
+    margin: .5rem 0;
+    font-size: .9rem;
+}
+
+.card-box .badge {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    background-color: red;
+    border-radius: 0%;
+}
+.card-box .badge small {
+    color: #fff !important;
+}
+
+.card-box p {
+    font-size: .8rem;
+    margin-top: 0.8rem;
+    color: #2557aa !important;
+}
+
+.card-box h6 {
+    color: orangered;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.card-box del,
+.card-box small {
+    color: #aaa;
+    font-size: 0.7rem;
+}
+
+.card-box .rating small {
+    margin-top: .5rem;
+}
+
+.card-box span {
+    font-size: 0.9rem;
+}
+
+/* Pagination For Deployment */
+.pagination {
+    justify-content: end;
+}
+
+.pagination .css-nhb8h9 {
+    flex-wrap: nowrap !important;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root {
+    margin: 0 .3rem;
+    border-color: #999;
+    border-radius: 0%;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root:hover {
+    border-color: orangered;
+    color: orangered !important;
+    background: none !important;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: orangered;
+    color: #fff;
+    border-color: orangered;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: rgb(237, 63, 0) !important;
+    color: #fff !important;
+    border-color: orangered !important;
+}
+
+/* Swiper Pagination */
+.swiper-button-prev,
+.swiper-button-next {
+    background-color: #fff;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height: 60px !important;
+    width: 40px !important;
+    margin-top: -2.5rem !important;
+    transition: all .3s ease-in-out;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+    background-color: red !important;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    content: '';
+    color: #111;
+    font-size: 15px !important;
+    padding: 15px 100px;
+    font-weight: bold;
+    transition: all .3s ease-in-out;
+}
+
+.swiper-button-prev:hover::after,
+.swiper-button-next:hover::after {
+    color: #fff !important;
+}
+
+
+@media (max-width: 1400px) {
+    .card-box .MuiPaper-root {
+        border-radius: 0% !important;
+        box-shadow: none !important;
+        height: 100%;
+    }
+}
+
+@media (max-width: 400px) {
+    .product-list {
+        width: 350px !important;
+    }
+}
