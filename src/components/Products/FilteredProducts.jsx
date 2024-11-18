@@ -221,12 +221,10 @@ function FilterProducts() {
                                                     />
                                                 </div>
 
-                                                <CardContent>
-                                                    <h5 className='mt-3' style={{ color: "#333", fontWeight: "600", fontSize: "1rem" }}>{product.title}</h5>
-                                                    <p style={{ fontSize: ".75rem" }}>
-                                                        {product.description.slice(0, 80)}...
-                                                    </p>
-                                                </CardContent>
+                                                <h5 className='mt-3' style={{ color: "#333", fontWeight: "600", fontSize: "1rem" }}>{product.title}</h5>
+                                                <p className='mb-2' style={{ fontSize: ".75rem" }}>
+                                                    {product.description.slice(0, 80)}...
+                                                </p>
 
                                                 <h6>Rs. {calculateDiscountedPrice(product.price, product.discountPercentage).toFixed(2)}</h6>
                                                 {
