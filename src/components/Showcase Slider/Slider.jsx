@@ -35,7 +35,7 @@ function Slider() {
                     </div>
                 </Carousel>
 
-                <img src={banner} className='w-100' alt="" />
+                <img src={banner} className='w-100 sm:block hidden' alt="" />
             </div>
         </>
     )

@@ -55,7 +55,7 @@ function Products({
                 <div key={slug} style={{ marginBottom: '20px' }}>
                     <div className="d-flex align-items-center justify-content-between mb-3">
                         <h4 className='text-2xl text-bold text-gray-500'>{name}</h4>
-                        <Divider sx={{ backgroundColor: "#aaa", width: "80%" }} />
+                        {/* <Divider sx={{ backgroundColor: "#aaa", width: "50%" }} /> */}
                         <Link to={`/products/${slug}`} className='btn hover:bg-gray-200 text-sm rounded-none'>View All</Link>
                     </div>
                     <Swiper
@@ -64,7 +64,7 @@ function Products({
                         navigation
                         pagination={{ clickable: true }}
                         breakpoints={{
-                            400: { slidesPerView: 1 },
+                            250: { slidesPerView: 1 },
                             576: { slidesPerView: 2 },
                             768: { slidesPerView: 3 },
                             992: { slidesPerView: 4 },

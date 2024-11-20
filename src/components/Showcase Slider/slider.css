@@ -3,6 +3,10 @@
 Carousel Dots Styling
 ####################################
 */
+.carousel-slider-img img {
+    height: auto;
+    object-fit: cover;
+}
 .carousel .control-dots .dot {
     width: 10px !important;
     height: 10px !important;
@@ -12,4 +16,11 @@ Carousel Dots Styling
 .carousel .control-dots .dot.selected {
     box-shadow: none !important;
     background-color: red !important;
+}
+
+@media (max-width: 650px) {
+    .carousel-slider-img img {
+        height: 400px;
+        object-fit: cover;
+    }
 }

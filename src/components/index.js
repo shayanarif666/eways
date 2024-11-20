@@ -1,3 +1,5 @@
+import AddressManager from "./Profile/AddressManager";
+import BottomNavs from "./Navbar/BottomNavs";
 import BackDropLoader from "./Loader/BackDropLoader";
 import Cart from "./Cart/Cart";
 import CartItems from "./Cart/CartItems";
@@ -22,12 +24,20 @@ import Products from "./Products/Products";
 import ProductCard from "./Products/ProductCard";
 import ProductDetail from "./Single Product/ProductDetails";
 import ProductDetailLoader from "./Loader/ProductDetailLoader";
+import ProfileSidebar from "./Profile/ProfileSidebar";
+import ProfileTabs from "./Profile/ProfileTabs";
+import ProfileInformation from "./Profile/ProfileInformation";
+import ProfileForm from "./Profile/ProfileForm";
 import ReviewsAndRatings from "./Reviews Ratings/ReviewsAndRatings";
 import ReviewForm from "./Reviews Ratings/ReviewForm";
+import UserProfile from "./Profile/UserProfile";
 import Wishlist from "./Wishlist/Wishlist";
+import WishlistItems from "./Wishlist/WishlistItems";
 import WhyShopWithUs from "./Services/WhyShopWithUs";
 
 export {
+    AddressManager,
+    BottomNavs,
     BackDropLoader,
     Cart,
     CartItems,
@@ -52,8 +62,14 @@ export {
     ProductCard,
     ProductDetail,
     ProductDetailLoader,
+    ProfileSidebar,
+    ProfileTabs,
+    ProfileInformation,
+    ProfileForm,
     ReviewsAndRatings,
     ReviewForm,
+    UserProfile,
     Wishlist,
+    WishlistItems,
     WhyShopWithUs
 }

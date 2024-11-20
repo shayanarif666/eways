@@ -13,7 +13,7 @@ function Logo({
         alt=""
         className={`${className}`}
         {...props}
-        style={{ height: "100px", width: "100px", filter: "invert(99%) sepia(13%) saturate(0%) hue-rotate(66deg) brightness(113%) contrast(95%)" }}
+        style={{ height: "100px", width: "100px", filter: "invert(96%) sepia(9%) saturate(3%) hue-rotate(350deg) brightness(120%) contrast(100%)" }}
       />
     </Link>
   )

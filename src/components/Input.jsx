@@ -25,12 +25,9 @@ function Input({
           style={style}
           {...props}
         />
-        {
-          type === "search" ?
-            <FiSearch
-              className='absolute right-5 top-50 -translate-y-1/2 bg-red-700 text-4xl rounded-full p-1.5 text-white hover:bg-red-800 cursor-pointer'
-            /> : <></>
-        }
+        <FiSearch
+          className='absolute right-5 top-50 -translate-y-1/2 bg-red-700 text-4xl rounded-full p-1.5 text-white hover:bg-red-800 cursor-pointer'
+        />
 
       </div>
     </>
