@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiSearch } from "react-icons/fi";
+import { Link } from 'react-router-dom';
 
 function Input({
   className = "",

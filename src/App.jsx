@@ -1,6 +1,5 @@
 import './App.css';
 import { Route, Routes } from 'react-router';
-import { Login } from './components/index';
 import HomePage from './pages/HomePage';
 import FilteredProductsPage from './pages/FilteredProductsPage';
 import ProductDetailsPage from './pages/ProductDetailsPage';
@@ -9,6 +8,8 @@ import CheckoutPage from './pages/CheckoutPage';
 import WishlistPage from './pages/WishlistPage';
 import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProfilePage from './pages/ProfilePage';
+import RegisterPage from './pages/RegisterPage';
+import LoginPage from './pages/LoginPage';
 
 function App() {
   return (
@@ -22,7 +23,9 @@ function App() {
         <Route path='/wishlist/:userId' element={<WishlistPage />} />
         <Route path='/orders/:userId' element={<OrderHistoryPage />} />
         <Route path='/profile/:userId' element={<ProfilePage />} />
-        <Route path='/login' element={<Login />} />
+
+        <Route path='/register' element={<RegisterPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
     </>
   )

@@ -31,6 +31,7 @@ import ProfileInformation from "./Profile/ProfileInformation";
 import ProfileForm from "./Profile/ProfileForm";
 import ReviewsAndRatings from "./Reviews Ratings/ReviewsAndRatings";
 import ReviewForm from "./Reviews Ratings/ReviewForm";
+import Register from "./Auth/Register";
 import UserProfile from "./Profile/UserProfile";
 import Wishlist from "./Wishlist/Wishlist";
 import WishlistItems from "./Wishlist/WishlistItems";
@@ -68,6 +69,7 @@ export {
     ProfileForm,
     ReviewsAndRatings,
     ReviewForm,
+    Register,
     Slider,
     SearchResults,
     UserProfile,
