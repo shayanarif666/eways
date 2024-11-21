@@ -6,12 +6,11 @@ function Input({
   label = "",
   type,
   placeholder = "",
-  value = "",
+  value,
   onChangeValue,
   style,
   ...props
 }) {
-  console.log(type === "search")
   return (
     <>
       {type === "search" ? <></> : <label>{label}</label>}

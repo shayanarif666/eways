@@ -17,6 +17,7 @@ import CategoriesList from "./Categories Listing/CategoriesList";
 import Login from "./Auth/Login";
 import Layout from "./Layout/Layout";
 import Slider from "./Showcase Slider/Slider";
+import SearchResults from "./Search/SearchResults";
 import OrderSummary from "./Cart/OrderSummary";
 import OrderHistory from "./Orders/OrderHistory";
 import OrderHistoryItems from "./Orders/OrderHistoryItems";
@@ -41,19 +42,18 @@ export {
     BackDropLoader,
     Cart,
     CartItems,
-    FilteredProducts,
+    Categories,
+    CategoriesList,
     Checkout,
+    FilteredProducts,
     Footer,
     Header,
     Navbar,
+    Input,
     Logo,
     Loading,
-    Input,
     NavigationMenus,
-    Categories,
-    CategoriesList,
     Login,
-    Slider,
     Layout,
     OrderSummary,
     OrderHistory,
@@ -68,6 +68,8 @@ export {
     ProfileForm,
     ReviewsAndRatings,
     ReviewForm,
+    Slider,
+    SearchResults,
     UserProfile,
     Wishlist,
     WishlistItems,

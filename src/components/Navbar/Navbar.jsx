@@ -1,15 +1,63 @@
-import React from 'react';
-import { Input, Logo } from '../index';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Input, Logo, SearchResults } from '../index';
 import { IoMdHeartEmpty } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 import { LuShoppingCart } from "react-icons/lu";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./navbar.css";
+import productService from '../../services/productService';
 
 function Navbar() {
+
+    // State Variables
+    const [search, setSearch] = useState("");
+    const [searchProducts, setSearchProducts] = useState([]);
+
+    const navigate = useNavigate();
+
+
+    // Debounce function to delay execution
+    const debounceFunction = useCallback((callback, delay) => {
+        let timer;
+        return (...args) => {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(() => {
+                callback(...args);
+            }, delay);
+        };
+    }, []);
+
+    // Get All Search Results
+    const getAllSearchResults = async (searchValue) => {
+        if (!searchValue) {
+            setSearchProducts([]);
+            return;
+        }
+
+        try {
+            const { products } = await productService.getSearchProducts(searchValue);
+            setSearchProducts(products);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // Debounced version of getAllSearchResults
+    const debouncedSearch = useCallback(
+        debounceFunction(getAllSearchResults, 1000), // Delay of 1 second
+        []
+    );
+
+    // Handle input change
+    const handleSearchResults = (e) => {
+        const searchValue = e.target.value;
+        setSearch(searchValue);
+        debouncedSearch(searchValue);
+    };
+
     return (
-        <nav className='navbar pt-10' style={{ backgroundColor: "#e63128" }} id='navbar'>
-            <div className="container-fluid d-block">
+        <nav className='navbar pt-10' id='navbar'>
+            <div className="container d-block">
                 <div className="row flex items-center" style={{ marginTop: "-2.3rem" }}>
                     <div className="logo-area col-lg-2 col-xl-2 col-4 order-1 m-auto">
                         <Logo />
@@ -19,8 +67,13 @@ function Navbar() {
                             type={"search"}
                             placeholder='Search everything at Eways'
                             className='w-100'
+                            onChangeValue={(e) => handleSearchResults(e)}
+                            value={search}
                             style={{ borderRadius: "25px", border: "none", padding: ".8rem 1.2rem" }}
                         />
+                        <div className={`search-results ${searchProducts.length > 0 ? "d-block" : "d-none"}`}>
+                            <SearchResults updateSearch={setSearch} searchValue={search} products={searchProducts} />
+                        </div>
                     </div>
                     <div className="menu-items col-lg-5 col-xl-4 ms-auto border-green-700 col-8 order-lg-3 order-2 sm:block hidden">
                         <div className="d-flex align-items-center justify-content-end">

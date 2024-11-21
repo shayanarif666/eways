@@ -1,11 +1,33 @@
-.bottom-nav.Mui-selected   {
+.bottom-nav.Mui-selected {
     color: #e63128 !important;
+}
+
+#navbar {
+    background-color: #e63128;
+}
+
+/* Search Results */
+.search-bar {
+    position: relative;
+}
+.search-bar .search-results {
+    position: absolute;
+    top: 110%;
+    left: 2%;
+    width: 100%;
+    z-index: 999 !important;
+}
+.search-bar .search-results h4:hover {
+    color: #e63128;
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 @media (max-width:992px) {
     #navbar {
         max-height: 100% !important;
     }
+
     #navbar .logo img {
         height: 130px !important;
     }
