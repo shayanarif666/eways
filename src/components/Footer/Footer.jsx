@@ -1,110 +1,116 @@
 import React from 'react';
 import './footer.css';
-import { FaFacebook, FaTwitter, FaInstagram, FaGlobe, FaYoutube } from 'react-icons/fa';
+import { Box, TextField, Button, Typography, Link } from "@mui/material";
+import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { IoCall } from "react-icons/io5";
+import { LuClock4 } from "react-icons/lu";
+import { SiGoogleplay, SiAppstore } from "react-icons/si";
+import cashapp from "../../assets/Images/Payment Gateway/cashapp.png";
+import paypal from "../../assets/Images/Payment Gateway/paypal.png"
 
 const Footer = () => {
     return (
-        <div className="footer-container shadow-lg pt-5 mt-4">
-            <div className="container mx-auto">
+        <footer className="bg-zinc-900 text-white py-12">
+            <div className="container mx-auto px-5">
                 <div className="row">
-
-                    <div className="footer-section col">
-                        <h4>Customer Care</h4>
+                    {/* Contact Details */}
+                    <div className="col-xl-3 mb-4">
+                        <h4 className="font-bold mb-4 text-medium">
+                            CONTACT DETAILS
+                        </h4>
                         <ul>
-                            <li>Help Center</li>
-                            <li>How to Buy</li>
-                            <li>Corporate & Bulk Purchasing</li>
-                            <li>Returns & Refunds</li>
-                            <li>Shopaholics Shop</li>
-                            <li>Contact Us</li>
-                            <li>Purchase Protection</li>
-                            <li>Shopaholics Pick up Points</li>
-                        </ul>
-
-                        <div style={{ marginTop: "2rem" }}>
-                            <h4>Make Money With Us</h4>
-                            <ul>
-                                <li>Shopaholics University</li>
-                                <li>Sell on Shopaholics</li>
-                                <li>Join Shopaholics Affiliate Program</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div className="footer-section col">
-                        <h4>Shopaholics</h4>
-                        <ul>
-                            <li>About Us</li>
-                            <li>Digital Payments</li>
-                            <li>Shopaholics Donates</li>
-                            <li>Shopaholics Blog</li>
-                            <li>Terms & Conditions</li>
-                            <li>Privacy Policy</li>
-                            <li>NTN Number : 4012118-6</li>
-                            <li>STRN Number : 1700401211818</li>
-                            <li>Online Shopping App</li>
-                            <li>Online Grocery Shopping</li>
-                            <li>Shopaholics Exclusive</li>
+                            <li className='mb-3 text-sm text-zinc-400 flex'>
+                                <FaLocationDot className='mt-1 me-2' /> 156-157, Block 3, BYJCHS, Bahadurabad, Karachi, Pakistan</li>
+                            <li className='mb-3 text-sm text-zinc-400 flex'>
+                                <FaLocationDot className='mt-1 me-2' /> Shop # GF 16 & FF 09, Safa Mall, Ziarat line, Malir Cantonment, Karachi, Pakistan</li>
+                            <li className='mb-3 text-sm text-zinc-400 flex'>
+                                <IoCall className='mt-1 me-2' />(021) 111-624-333 (111-NAHEED)</li>
+                            <li className='mb-3 text-sm text-zinc-400 flex'>
+                                <LuClock4 className='mt-1 me-2' />Customer Support: 7 Days a Week, 9:00 AM - 10:00 PM</li>
                         </ul>
                     </div>
 
-                    <div className="footer-section col">
-                        <h4>Mail Us</h4>
-                        <div className="mail">
-                            <address className='d-block' style={{ fontSize: ".8rem", color: "#111", lineHeight: "1.5rem" }}>
-                                Shopaholics Internet Private limited, <br />
-                                Business Arcade, Shahrah-e-Faisal <br /> Block 6 P.E.C.H.S., Karachi, Sindh.
-                            </address>
-                        </div>
-
-                        <div className="register-office mt-5">
-                            <h4>Register Office</h4>
-                            <address className='d-block' style={{ fontSize: ".8rem", color: "#111", lineHeight: "1.5rem" }}>
-                                Shopaholics Internet Private limited, <br />
-                                Business Arcade, Shahrah-e-Faisal <br /> Block 6 P.E.C.H.S., Karachi, Sindh. <br />
-                                <span>CIN : UYE873726JUDGTFSF</span> <br />
-                                <span>Telephone : <a href="" className='text-decoration-none'>+92 37638202862</a></span>
-                            </address>
-                        </div>
-                    </div>
-
-                    <div className="footer-section col">
-                        <h4>Help</h4>
-                        <ul>
-                            <li>Help Center</li>
-                            <li>How to Buy</li>
-                            <li>Corporate & Bulk Purchasing</li>
-                            <li>Returns & Refunds</li>
+                    {/* Customer Services */}
+                    <div className="col-xl-2 mb-4">
+                        <h4 className="font-bold mb-4 text-medium">
+                            CUSTOMER SERVICES
+                        </h4>
+                        <ul className="space-y-2">
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Contact Us</Link>
+                            </li>
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Delivery Info</Link>
+                            </li>
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>FAQs</Link>
+                            </li>
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Naheed Loyalty</Link>
+                            </li>
                         </ul>
-
-                        <div className="footer-icons mt-5 d-lg-block d-none">
-                            <h4>Follow Us</h4>
-                            <div className="social-icons mt-4">
-                                <FaFacebook style={{ color: "#3272d9" }} />
-                                <FaTwitter style={{ color: "#489ae9" }} />
-                                <FaInstagram style={{ color: "#eb3d62" }} />
-                                <FaGlobe style={{ color: "#f8540b" }} />
-                                <FaYoutube style={{ color: "#e12b1e" }} />
-                            </div>
-                        </div>
                     </div>
 
-                    <div className="footer-section col  d-lg-none d-block">
-                        <div className="footer-icons">
-                            <h4>Follow Us</h4>
-                            <div className="social-icons mt-4">
-                                <FaFacebook style={{ color: "#3272d9" }} />
-                                <FaTwitter style={{ color: "#489ae9" }} />
-                                <FaInstagram style={{ color: "#eb3d62" }} />
-                                <FaGlobe style={{ color: "#f8540b" }} />
-                                <FaYoutube style={{ color: "#e12b1e" }} />
-                            </div>
-                        </div>
+                    {/* Information */}
+                    <div className="col-xl-2 mb-4">
+                        <h4 className="font-bold mb-4 text-medium">
+                            INFORMATION
+                        </h4>
+                        <ul className="space-y-2">
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Return & Refund</Link>
+                            </li>
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Privacy Policy</Link>
+                            </li>
+                            <li className='text-sm text-zinc-400 mb-3'>
+                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Terms & Conditions</Link>
+                            </li>
+                        </ul>
                     </div>
 
+                    {/* Newsletter */}
+                    <div className="col-xl-5 mb-4">
+                        <h4 className="font-bold mb-4 text-medium">
+                            SUBSCRIBE OUR NEWSLETTER
+                        </h4>
+                        <p className="text-medium mb-3">
+                            Get the <strong>latest offers</strong> and promotions!
+                        </p>
+                        <div className="flex items-center space-x-2">
+                            <TextField
+                                variant="outlined"
+                                size="small"
+                                placeholder="Enter your email"
+                                className="bg-white flex-grow"
+                            />
+                            <button className="bg-blue-500 py-2 px-3 text-white font-semibold">
+                                Subscribe
+                            </button>
+                        </div>
+                        <div className="flex space-x-3 mt-5">
+                            <FaFacebookF className="text-3xl cursor-pointer bg-blue-500 text-2xl p-1" />
+                            <FaInstagram className="text-3xl cursor-pointer bg-pink-500 text-2xl p-1" />
+                            <FaTiktok className="text-3xl cursor-pointer bg-gray-500 text-2xl p-1" />
+                            <FaLinkedin className="text-3xl cursor-pointer bg-sky-800 text-2xl p-1" />
+                            <FaYoutube className="text-3xl cursor-pointer bg-red-500 text-2xl p-1" />
+                        </div>
+                    </div>
+                </div>
+
+                <hr className="border-gray-700 my-5" />
+
+                {/* Footer Bottom */}
+                <div className="flex justify-between items-center">
+                    <p className="text-sm">Copyright © 2024 Eways.pk. All rights reserved.</p>
+                    <div className="flex space-x-3">
+                        <img src={cashapp} alt="CashApp" className="h-6" />
+                        <img src={paypal} alt="Paypal" className="h-6" />
+                    </div>
                 </div>
             </div>
-        </div>
+        </footer>
     );
 };
 

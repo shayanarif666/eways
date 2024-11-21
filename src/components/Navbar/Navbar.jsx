@@ -44,7 +44,7 @@ function Navbar() {
 
     // Debounced version of getAllSearchResults
     const debouncedSearch = useCallback(
-        debounceFunction(getAllSearchResults, 1000), // Delay of 1 second
+        debounceFunction(getAllSearchResults, 500), // Delay of 1 second
         []
     );
 
