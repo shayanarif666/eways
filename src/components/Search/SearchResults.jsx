@@ -30,7 +30,7 @@ function SearchResults({
                     subheader={<li />}
                 >
                     {products?.slice(0, 3).map((product) => (
-                        <div className='col-lg-4 col-sm-4 col-6' key={`item-${product.id}-${product.id}`} onClick={() => handleSearchNavigate(product.category)}>
+                        <div className='col-xl-4 col-lg-6 col-sm-4 col-6' key={`item-${product.id}-${product.id}`} onClick={() => handleSearchNavigate(product.category)}>
                             <img src={product.thumbnail} className='w-100' alt="" />
                             <h4 className='font-small mb-3'>{product.title}</h4>
                             <div className="flex items-center">
