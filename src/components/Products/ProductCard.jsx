@@ -13,14 +13,15 @@ function ProductCard({ product, discountPrice }) {
                             component="img"
                             alt="green iguana"
                             height="150"
+                            loading='lazy'
                             image={product.thumbnail}
                         />
                         <div className="badge">
-                            <small>-{product.discountPercentage.toFixed(2)}%</small>
+                            <small>Save {product.discountPercentage.toFixed(0)}%</small>
                         </div>
                     </div>
                     <p>
-                        {product.description.slice(0, 35)}....
+                        {product.title.slice(0, 18)}....
                     </p>
                     <h6>Rs. {discountPrice(product.price, product.discountPercentage).toFixed(2)}</h6>
                     {

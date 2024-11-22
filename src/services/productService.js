@@ -1,13 +1,16 @@
 export class ProductService {
     constructor() { }
 
-    // Get All Products -- TODO : Research About API METHODS -- Object
+    // Get All Products
     async getProducts() {
         try {
-            const response = await fetch("https://dummyjson.com/products?limit=100");
+            const response = await fetch("https://dummyjson.com/products?limit=194");
             if (!response.ok) throw new Error("Something went wrong !");
-            const products = await response.json();
-            return products;
+            const data = await response.json();
+            return {
+                products: data.products, // Complete product list
+                total: data.products.length, // Total number of products
+            };
         } catch (error) {
             console.log("Server Service :: Product", error);
         }

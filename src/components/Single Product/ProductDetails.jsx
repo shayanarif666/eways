@@ -141,7 +141,7 @@ function ProductDetail() {
                                         component="img"
                                         image={product.images[selectedImage]}
                                         alt="Product Image"
-                                        sx={{ mb: 2 }}
+                                        sx={{ mb: 2, height: "600px", objectFit: 'contain' }}
                                     />
 
                                     <Divider style={{ backgroundColor: "#ddd", marginTop: "-.5rem" }} />
@@ -288,25 +288,6 @@ function ProductDetail() {
                                             </div>
 
                                         </div>
-                                        <div className="stats-occurances mt-lg-3 mt-0">
-
-                                            <h6>Sold by</h6>
-
-                                            <div className="stats-container">
-                                                <div className="stats-box">
-                                                    <div className="stats-label">Positive Seller Ratings</div>
-                                                    <div className="stats-value">90%</div>
-                                                </div>
-                                                <div className="stats-box">
-                                                    <div className="stats-label">Ship on Time</div>
-                                                    <div className="stats-value">99%</div>
-                                                </div>
-                                                <div className="stats-box">
-                                                    <div className="stats-label">Chat Response Rate</div>
-                                                    <div className="stats-value">86%</div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
 
                                 </Grid>
@@ -391,7 +372,7 @@ function ProductDetail() {
 
                             </div>
 
-                            <Grid spacing={4} className='mt-5'>
+                            <Grid spacing={4} className='my-5'>
 
                                 <h4 className='text-xl font-semibold'>Related Products</h4>
 
@@ -399,16 +380,14 @@ function ProductDetail() {
 
                                 <Swiper
                                     modules={[Navigation]}
-                                    slidesPerView={6}
+                                    slidesPerView={4}
                                     navigation
                                     pagination={{ clickable: true }}
                                     breakpoints={{
                                         400: { slidesPerView: 1 },
                                         576: { slidesPerView: 2 },
                                         768: { slidesPerView: 3 },
-                                        992: { slidesPerView: 4 },
-                                        1200: { slidesPerView: 5 },
-                                        1535: { slidesPerView: 6 },
+                                        992: { slidesPerView: 4 }
                                     }}
                                     className="mySwiper"
                                 >
@@ -416,7 +395,7 @@ function ProductDetail() {
                                         {
                                             productsByCategories?.filter((prod) => prod.id !== parseInt(id)).slice(0, 18).map((product) => {
                                                 return (
-                                                    <SwiperSlide key={product.id} className="p-4">
+                                                    <SwiperSlide key={product.id} className="pr-4">
                                                         <ProductCard product={product} discountPrice={calculateDiscountedPrice} />
                                                     </SwiperSlide>
                                                 )

@@ -15,7 +15,7 @@ const Footer = () => {
             <div className="container mx-auto px-5">
                 <div className="row">
                     {/* Contact Details */}
-                    <div className="col-xl-3 mb-4">
+                    <div className="col-xl-3 col-md-6 mb-4">
                         <h4 className="font-bold mb-4 text-medium">
                             CONTACT DETAILS
                         </h4>
@@ -32,7 +32,7 @@ const Footer = () => {
                     </div>
 
                     {/* Customer Services */}
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-2 col-md-6 mb-4">
                         <h4 className="font-bold mb-4 text-medium">
                             CUSTOMER SERVICES
                         </h4>
@@ -53,7 +53,7 @@ const Footer = () => {
                     </div>
 
                     {/* Information */}
-                    <div className="col-xl-2 mb-4">
+                    <div className="col-xl-2 col-md-6 mb-4">
                         <h4 className="font-bold mb-4 text-medium">
                             INFORMATION
                         </h4>
@@ -71,21 +71,21 @@ const Footer = () => {
                     </div>
 
                     {/* Newsletter */}
-                    <div className="col-xl-5 mb-4">
+                    <div className="col-xl-5 col-md-6 mb-4">
                         <h4 className="font-bold mb-4 text-medium">
                             SUBSCRIBE OUR NEWSLETTER
                         </h4>
                         <p className="text-medium mb-3">
                             Get the <strong>latest offers</strong> and promotions!
                         </p>
-                        <div className="flex items-center space-x-2">
+                        <div className="sm:flex items-center">
                             <TextField
                                 variant="outlined"
                                 size="small"
                                 placeholder="Enter your email"
-                                className="bg-white flex-grow"
+                                className="bg-white flex-grow w-100"
                             />
-                            <button className="bg-blue-500 py-2 px-3 text-white font-semibold">
+                            <button className="bg-red-600 hover:bg-red-700 py-2 px-3 text-white font-semibold">
                                 Subscribe
                             </button>
                         </div>
@@ -102,9 +102,9 @@ const Footer = () => {
                 <hr className="border-gray-700 my-5" />
 
                 {/* Footer Bottom */}
-                <div className="flex justify-between items-center">
+                <div className="sm:flex justify-between items-center">
                     <p className="text-sm">Copyright © 2024 Eways.pk. All rights reserved.</p>
-                    <div className="flex space-x-3">
+                    <div className="flex space-x-3 sm:mt-0 mt-2">
                         <img src={cashapp} alt="CashApp" className="h-6" />
                         <img src={paypal} alt="Paypal" className="h-6" />
                     </div>
