@@ -59,7 +59,7 @@ function Navbar() {
         <nav className='navbar pt-10' id='navbar'>
             <div className="xl:container container-fluid d-block">
                 <div className="row flex items-center" style={{ marginTop: "-2.3rem" }}>
-                    <div className="logo-area col-lg-2 col-xl-2 col-4 order-1 m-auto">
+                    <div className="logo-area col-lg-2 col-xl-2 col-sm-4 order-1">
                         <Logo />
                     </div>
                     <div className="search-bar col-lg-5 col-xl-6 m-auto order-lg-2 order-3 sm:py-0 py-2">

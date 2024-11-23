@@ -1,10 +1,13 @@
 import React from 'react'
-import { BottomNavs, Navbar, NavigationMenus } from '../index';
+import { BottomNavs, Navbar, NavigationMenus, TopNavigation } from '../index';
 import { Route, Routes } from 'react-router-dom';
 
 function Header() {
     return (
         <>
+            <div className='sm:block hidden'>
+                <TopNavigation />
+            </div>
             <Navbar />
             <div className='sm:block hidden w-100'>
                 <Routes>

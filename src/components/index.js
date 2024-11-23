@@ -1,4 +1,5 @@
 import AddressManager from "./Profile/AddressManager";
+import AllCategories from "./Categories Listing/AllCategories";
 import BottomNavs from "./Navbar/BottomNavs";
 import BackDropLoader from "./Loader/BackDropLoader";
 import Cart from "./Cart/Cart";
@@ -32,6 +33,7 @@ import ProfileForm from "./Profile/ProfileForm";
 import ReviewsAndRatings from "./Reviews Ratings/ReviewsAndRatings";
 import ReviewForm from "./Reviews Ratings/ReviewForm";
 import Register from "./Auth/Register";
+import TopNavigation from "./Navbar/TopNavigation";
 import UserProfile from "./Profile/UserProfile";
 import Wishlist from "./Wishlist/Wishlist";
 import WishlistItems from "./Wishlist/WishlistItems";
@@ -39,6 +41,7 @@ import WhyShopWithUs from "./Services/WhyShopWithUs";
 
 export {
     AddressManager,
+    AllCategories,
     BottomNavs,
     BackDropLoader,
     Cart,
@@ -72,6 +75,7 @@ export {
     Register,
     Slider,
     SearchResults,
+    TopNavigation,
     UserProfile,
     Wishlist,
     WishlistItems,

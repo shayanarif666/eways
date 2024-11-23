@@ -20,7 +20,7 @@ function HomePage() {
 
     return (
         <Layout>
-            <div className="container-fluid" style={{ height: "100%", paddingTop: "2rem" }}>
+            <div className="container" style={{ height: "100%", paddingTop: "2rem" }}>
                 <Slider />
                 <CategoriesList categories={categories} />
                 <Products />

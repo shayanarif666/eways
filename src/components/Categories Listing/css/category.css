@@ -1,0 +1,19 @@
+.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
+    margin-left: -.5rem !important;
+    border-radius: 0% !important;
+
+}
+
+.css-1toxriw-MuiList-root-MuiMenu-list {
+    padding: 0% !important;
+}
+
+.css-1toxriw-MuiList-root-MuiMenu-list li {
+    border-bottom: 1px solid #eee;
+    font-size: .9rem;
+}
+.css-1toxriw-MuiList-root-MuiMenu-list li:hover {
+    background-color: #b62026;
+    color: #fff !important;
+    border-color: #b62026;
+}

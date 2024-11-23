@@ -20,13 +20,13 @@ function NavigationMenus() {
 
   return (
     <>
-      <div className="navigation-menus bg-white shadow-sm py-1">
+      <div className="navigation-menus bg-white shadow-sm">
         <div className="container">
-          <div className="row flex items-center">
-            <div className="col-xl-2 col-4 categories border-r-2 border-gray-100">
+          <div className="flex items-center">
+            <div className="categories px-2 me-4" style={{ backgroundColor: "#111" }}>
               <Categories />
             </div>
-            <div className="col-8 nav-menus-list">
+            <div className="nav-menus-list">
               {
                 navMenus && navMenus?.map(({ title, slug, isActive }) => {
                   return (isActive ?

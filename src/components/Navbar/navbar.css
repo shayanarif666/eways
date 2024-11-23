@@ -1,9 +1,9 @@
 .bottom-nav.Mui-selected {
-    color: #e63128 !important;
+    color: #b62026 !important;
 }
 
 #navbar {
-    background-color: #e63128;
+    background-color: #b62026;
 }
 
 /* Search Results */
@@ -18,7 +18,7 @@
     z-index: 999 !important;
 }
 .search-bar .search-results h4:hover {
-    color: #e63128;
+    color: #b62026;
     text-decoration: underline;
     cursor: pointer;
 }
@@ -26,9 +26,5 @@
 @media (max-width:992px) {
     #navbar {
         max-height: 100% !important;
-    }
-
-    #navbar .logo img {
-        height: 130px !important;
     }
 }

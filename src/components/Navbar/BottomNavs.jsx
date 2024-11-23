@@ -47,7 +47,7 @@ function BottomNavs() {
                     label='Profile' icon={<FaRegUser />}
                 />
                 <BottomNavigationAction
-                    onClick={() => handleRedirect(`/categories`)}
+                    onClick={() => handleRedirect(`/allCategories`)}
                     label='Categories'
                     icon={<BiCategory />}
                 />

@@ -9,7 +9,6 @@ export class ProductService {
             const data = await response.json();
             return {
                 products: data.products, // Complete product list
-                total: data.products.length, // Total number of products
             };
         } catch (error) {
             console.log("Server Service :: Product", error);

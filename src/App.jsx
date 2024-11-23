@@ -11,12 +11,14 @@ import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import CategoriesPage from './pages/CategoriesPage';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/allCategories' element={<CategoriesPage />} />
         <Route path='/products/:key' element={<FilteredProductsPage />} />
         <Route path='/product-detail/:id' element={<ProductDetailsPage />} />
         <Route path='/cart/:userId' element={<CartPage />} />
