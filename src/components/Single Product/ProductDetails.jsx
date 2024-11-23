@@ -301,6 +301,9 @@ function ProductDetail() {
                                         <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Overview</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
+                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="false">Description</button>
+                                    </li>
+                                    <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reviews ({product.reviews.length})</button>
                                     </li>
                                 </ul>
@@ -309,12 +312,7 @@ function ProductDetail() {
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                                         <div className="item-detail p-4">
 
-                                            <div className='d-flex align-items-center'>
-                                                <span style={{ fontSize: ".9rem" }}>Description :</span>
-                                                <p className='text-md text-gray-700 ms-2'>{product.description}</p>
-                                            </div>
-
-                                            <div className="d-flex align-items-center mt-4">
+                                            <div className="d-flex align-items-center">
                                                 <span style={{ fontSize: ".9rem" }}>Product Dimension :</span>
                                                 <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.dimensions.width} x {product.dimensions.height} x {product.dimensions.depth}</span>
                                             </div>
@@ -349,6 +347,13 @@ function ProductDetail() {
                                                 <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.sku} Pieces</span>
                                             </div>
 
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab" tabindex="0">
+                                        <div className="item-detail p-4">
+                                            <div className='d-flex align-items-center'>
+                                                <p className='text-md text-gray-700 ms-2'>{product.description}</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">

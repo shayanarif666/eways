@@ -92,7 +92,7 @@ function Products({
                             {gProducts &&
                                 gProducts.filter((prod) => prod.category === slug).slice(0, 10)
                                     .map((product, index) => (
-                                        <SwiperSlide key={product.id} className="pr-3">
+                                        <SwiperSlide key={product.id} className="pr-1">
                                             <div key={index} className="product-list ">
                                                 <ProductCard product={product} discountPrice={calculateDiscountedPrice} />
                                             </div>

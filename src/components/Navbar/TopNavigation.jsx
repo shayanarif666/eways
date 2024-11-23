@@ -10,9 +10,9 @@ const TopNavigation = () => {
                     </div>
                     <div className="col-6">
                         <ul className='flex items-center justify-center mt-1'>
-                            <li className='me-3 font-sm text-sm font-medium hover:underline'><a href="">Call Us: +92 21 3672 3280</a></li>
-                            <li className='me-3 text-sm font-medium'><a href="">Contact</a></li>
-                            <li className='me-3 text-sm font-medium'><a href="">Help</a></li>
+                            <li className='me-3 font-sm text-sm font-medium hover:underline'><a href="" className='hover:text-red-800'>Call Us: +92 21 3672 3280</a></li>
+                            <li className='me-3 text-sm font-medium hover:underline'><a href="" className='hover:text-red-800'>Contact</a></li>
+                            <li className='me-3 text-sm font-medium hover:underline'><a href="" className='hover:text-red-800'>Help</a></li>
                         </ul>
                     </div>
                 </div>

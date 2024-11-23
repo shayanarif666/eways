@@ -15,7 +15,7 @@ Carousel Dots Styling
 }
 .carousel .control-dots .dot.selected {
     box-shadow: none !important;
-    background-color: red !important;
+    background-color: #b62026 !important;
 }
 
 @media (max-width: 650px) {

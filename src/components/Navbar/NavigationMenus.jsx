@@ -23,7 +23,7 @@ function NavigationMenus() {
       <div className="navigation-menus bg-white shadow-sm">
         <div className="container">
           <div className="flex items-center">
-            <div className="categories px-2 me-4" style={{ backgroundColor: "#111" }}>
+            <div className="categories px-2 me-4" style={{ backgroundColor: "#2557aa" }}>
               <Categories />
             </div>
             <div className="nav-menus-list">

@@ -5,22 +5,22 @@ function WhyShopWithUs() {
 
     const features = [
         {
-            icon: <FaStar size={40} className="text-orange-500 mb-4 m-auto" />,
+            icon: <FaStar size={40} className="text-red-800 mb-4 m-auto" />,
             title: "SAVINGS SAVINGS & SAVINGS",
             description: "Mega discount offers all year round.",
         },
         {
-            icon: <FaWarehouse size={40} className="text-orange-500 mb-4 m-auto" />,
+            icon: <FaWarehouse size={40} className="text-red-800 mb-4 m-auto" />,
             title: "ALL THINGS AT ONE CLICK",
             description: "All your essential products available at QnE.",
         },
         {
-            icon: <FaShippingFast size={40} className="text-orange-500 mb-4 m-auto" />,
+            icon: <FaShippingFast size={40} className="text-red-800 mb-4 m-auto" />,
             title: "FAST SHIPPING",
             description: "Fast and convenient delivery at your doorstep.",
         },
         {
-            icon: <FaQuestionCircle size={40} className="text-orange-500 mb-4 m-auto" />,
+            icon: <FaQuestionCircle size={40} className="text-red-800 mb-4 m-auto" />,
             title: "HAVE QUESTIONS?",
             description: "Excellent Customer Service – We’re here and happy to help!",
         },
