@@ -10,6 +10,7 @@ import OrderHistoryPage from './pages/OrderHistoryPage';
 import ProfilePage from './pages/ProfilePage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path='/wishlist/:userId' element={<WishlistPage />} />
         <Route path='/orders/:userId' element={<OrderHistoryPage />} />
         <Route path='/profile/:userId' element={<ProfilePage />} />
+        <Route path='/privacy-policy' element={<PrivacyPolicyPage />}></Route>
 
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
