@@ -15,7 +15,7 @@ function Login() {
         <div className="container mx-auto p-5">
             <h2 className="text-lg font-bold mb-5">CUSTOMER LOGIN</h2>
 
-            <div className="row">
+            <div className="row g-4">
                 {/* Registered Customers Section */}
                 <div className="col-md-6">
                     <h4 className="text-sm font-semibold mb-4">REGISTERED CUSTOMERS</h4>
@@ -50,7 +50,7 @@ function Login() {
                         {/* Sign In Button */}
                         <Box>
                             <button
-                                className="bg-blue-500 hover:bg-black transition text-white px-3 py-2 font-medium"
+                                className="bg-red-800 hover:bg-red-900 transition text-white px-3 py-2 font-medium"
                             >
                                 Login Account
                             </button>

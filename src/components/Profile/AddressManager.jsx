@@ -39,7 +39,7 @@ const AddressManager = ({
 
                 {/* Add New Address Button */}
                 <div className="flex justify-between mt-6">
-                    <button onClick={() => handleEditForm(false)} className='bg-red-600 hover:bg-red-700 text-white px-3 py-2'>
+                    <button onClick={() => handleEditForm(false)} className='bg-red-800 hover:bg-red-900 text-white px-3 py-2'>
                         Add Address
                     </button>
                 </div>

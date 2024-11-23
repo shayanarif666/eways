@@ -84,7 +84,7 @@ function Navbar() {
                                     <span className='text-white font-bold font-sans'>My Items</span>
                                 </div>
                             </Link>
-                            <Link to={`/profile/2`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
+                            <Link to={`${true ? "/profile/2" : "/login"}`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
                                 <FaRegUser className='text-2xl text-white font-bold me-2' />
                                 <div className="info text-center md:block hidden">
                                     <h6 className='text-white'>Sign In</h6>

@@ -98,7 +98,7 @@ const ProfileInformation = () => {
 
                 {/* Buttons */}
                 <div className="flex justify-between">
-                    <button className="hover:bg-red-700 bg-red-600 py-2 px-3 font-semibold text-white">
+                    <button className="hover:bg-red-900 bg-red-800 py-2 px-3 font-semibold text-white">
                         Save
                     </button>
                 </div>
