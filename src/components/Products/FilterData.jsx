@@ -101,7 +101,7 @@ function FilterData({
                 <input type="number" className='form-control me-2' value={minPrice} onChange={(e) => updateMinPrice(e.target.value)} style={{ borderRadius: "0%" }} placeholder='Min' />
                 <span className='me-2 text-secondary' style={{ fontSize: ".9rem" }}>To</span>
                 <input type="number" className='form-control me-2' value={maxPrice} onChange={(e) => updateMaxPrice(e.target.value)} style={{ borderRadius: "0%" }} placeholder='Max' />
-                <button className='btn btn-main btn-danger rounded-none' onClick={() => updatePrice(minPrice, maxPrice)} >Apply</button>
+                <button className='btn bg-red-800 hover:bg-red-900 text-white rounded-none' onClick={() => updatePrice(minPrice, maxPrice)} >Apply</button>
             </div>
         </>
     )

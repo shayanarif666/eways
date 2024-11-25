@@ -30,6 +30,7 @@ import ProfileSidebar from "./Profile/ProfileSidebar";
 import ProfileTabs from "./Profile/ProfileTabs";
 import ProfileInformation from "./Profile/ProfileInformation";
 import ProfileForm from "./Profile/ProfileForm";
+import Page from "./Pagination/Page";
 import ReviewsAndRatings from "./Reviews Ratings/ReviewsAndRatings";
 import ReviewForm from "./Reviews Ratings/ReviewForm";
 import Register from "./Auth/Register";
@@ -70,6 +71,7 @@ export {
     ProfileTabs,
     ProfileInformation,
     ProfileForm,
+    Page,
     ReviewsAndRatings,
     ReviewForm,
     Register,

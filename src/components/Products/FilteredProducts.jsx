@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardMedia, Rating, Box, InputLabel, MenuItem, FormControl, Select, Divider, Stack, Pagination, Button, Drawer } from "@mui/material";
+import { Card, CardContent, CardMedia, Rating, Box, InputLabel, MenuItem, FormControl, Select, Divider, Stack, Button, Drawer } from "@mui/material";
 import { Link, useParams } from 'react-router-dom';
 import { IoFilterSharp } from "react-icons/io5";
 import { RxCross2 } from "react-icons/rx";
 import FilterData from './FilterData';
 import productService from '../../services/productService';
 import "./css/product.css";
-import { BackDropLoader } from '../index';
+import { BackDropLoader, Page } from '../index';
 
 function FilterProducts() {
 
@@ -30,11 +30,10 @@ function FilterProducts() {
     const fetchingData = async () => {
         setLoading(true);
         try {
-            const { products } = await productService.getProductsByCategories(key)
-            setFilteredProducts(products);
-            setFilteredData(products);
-            setTotalPages(Math.ceil(products.length / 5));
-
+            const { filteredData, total, length } = await productService.getProductsByCategories(key, page)
+            setFilteredProducts(filteredData);
+            setFilteredData(filteredData);
+            setTotalPages(Math.ceil(length / total));
             setLoading(false);
         } catch (error) {
             setLoading(false);
@@ -118,7 +117,6 @@ function FilterProducts() {
     // Handle Pagination
     const handlePageChange = async (e, value) => {
         setPage(value);
-        console.log(value)
     }
 
     // Handle Drawer
@@ -130,7 +128,7 @@ function FilterProducts() {
         <div className="mx-auto container py-5">
             <div className="row g-5">
 
-                <div className="col-lg-3 d-lg-block d-none">
+                <div className="col-lg-3 d-lg-block d-none border h-full py-4">
 
                     <h5 className='mb-4 fw-bold d-flex align-items-center'>Filters <IoFilterSharp className='ms-2' /></h5>
                     <FilterData
@@ -153,7 +151,7 @@ function FilterProducts() {
                         <div className="col-lg-5 col-12">
                             <p style={{ fontSize: ".9rem" }}>
                                 {filteredProducts?.length} items found for
-                                <span style={{ color: "orangered" }}> "{key[0].toUpperCase() + key.slice(1)}"</span>
+                                <span style={{ color: "#b30006" }}> "{key[0].toUpperCase() + key.slice(1)}"</span>
                             </p>
                         </div>
                         <div className="mb-4 col-lg-3 col-md-4 col-sm-6 col-6">
@@ -249,9 +247,7 @@ function FilterProducts() {
 
                     {
                         filteredProducts && <div className="pagination mt-5">
-                            <Stack spacing={5}>
-                                <Pagination count={totalPages} onChange={handlePageChange} variant="outlined" shape="rounded" size="small" style={{ color: "orange" }} />
-                            </Stack>
+                            <Page totalPages={totalPages} handlePageChange={handlePageChange} />
                         </div>
                     }
 

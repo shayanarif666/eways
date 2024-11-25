@@ -95,39 +95,6 @@ body {
     font-size: 0.9rem;
 }
 
-/* Pagination For Deployment */
-.pagination {
-    justify-content: end;
-}
-
-.pagination .css-nhb8h9 {
-    flex-wrap: nowrap !important;
-}
-
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root {
-    margin: 0 .3rem;
-    border-color: #999;
-    border-radius: 0%;
-}
-
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root:hover {
-    border-color: orangered;
-    color: orangered !important;
-    background: none !important;
-}
-
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
-    background-color: orangered;
-    color: #fff;
-    border-color: orangered;
-}
-
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
-    background-color: rgb(237, 63, 0) !important;
-    color: #fff !important;
-    border-color: orangered !important;
-}
-
 /* Swiper Pagination */
 .swiper-button-prev,
 .swiper-button-next {

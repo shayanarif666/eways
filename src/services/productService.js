@@ -2,11 +2,12 @@ export class ProductService {
     constructor() { }
 
     // Get All Products
-    async getProducts() {
+    async getProducts(page = 1) {
         try {
             const response = await fetch("https://dummyjson.com/products?limit=194");
             if (!response.ok) throw new Error("Something went wrong !");
             const data = await response.json();
+
             return {
                 products: data.products, // Complete product list
             };
@@ -40,12 +41,26 @@ export class ProductService {
     }
 
     // Skip & Limit Products
-    async getProductsByCategories(category) {
+    async getProductsByCategories(category, page = 1) {
+        const pagePerProducts = 8;
+        const startIndex = (page - 1) * pagePerProducts;
+        const endIndex = startIndex + pagePerProducts;
+
+        let filteredData = [];
+        let lengthOfProducts;
+
         try {
             const response = await fetch(`https://dummyjson.com/products/category/${category}`);
             if (!response.ok) throw new Error("Something went wrong !");
-            const products = await response.json();
-            return products;
+            const { products } = await response.json();
+            filteredData = products.slice(startIndex, endIndex);
+            lengthOfProducts = products.length;
+
+            return {
+                filteredData,
+                total: pagePerProducts,
+                length: lengthOfProducts
+            };
         } catch (error) {
             console.error("Server Service :: Categories Product", error);
         }

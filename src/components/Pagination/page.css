@@ -1,0 +1,32 @@
+/* Pagination For Deployment */
+.pagination {
+    justify-content: end;
+}
+
+.pagination .css-nhb8h9 {
+    flex-wrap: nowrap !important;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root {
+    margin: 0 .3rem;
+    border-color: #999;
+    border-radius: 0%;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root:hover {
+    border-color: #b62026;
+    color: #b62026 !important;
+    background: none !important;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+    background-color: #b62026;
+    color: #fff;
+    border-color: #b62026;
+}
+
+.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+    background-color: #b30006 !important;
+    color: #fff !important;
+    border-color: #b30006 !important;
+}
