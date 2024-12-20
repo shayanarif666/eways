@@ -1,32 +1,33 @@
-export class AuthService {
+export class InvoiceService {
     constructor() { }
 
-    // Get Carts
-    async getInvoices() {
-        
+    // Get Invoice By User 
+    async getInvoiceByUser(userID) {
+        try {
+
+        } catch (error) {
+
+        }
     }
 
-    // Get Single Cart
-    async getInvoice(userID) {
-        
-    }
-
-    // Add Cart
-    async addInvoices(data, userID) {
-        
-    }
-
-    // Update Cart
-    async updateInvoices(data, userID) {
-       
-    }
-
-    // Delete Cart
-    async deleteInvoice(id) {
-        
+    // Add Invoice
+    async addInvoice(token, sessionId) {
+        console.log("token", token, sessionId)
+        try {
+            const res = await fetch(`https://api.almehdisolutions.com/api/Order/save-invoice?session_id=${sessionId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+            return res.json();
+        } catch (error) {
+            console.log("Invoice Service :: Add Invoice", error)
+        }
     }
 }
 
-const authService = new AuthService();
+const invoiceService = new InvoiceService();
 
-export default authService;
+export default invoiceService;

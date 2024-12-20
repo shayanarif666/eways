@@ -2,77 +2,80 @@ export class CartService {
     constructor() { }
 
     // Get Carts
-    async getCarts() {
-        try {
-            const response = await fetch(`https://dummyjson.com/carts`);
-            if (!response.ok) throw new Error("Something went wrong !");
-            const carts = await response.json();
-            return carts;
-        } catch (error) {
-            console.log("Server Service :: Carts", error);
-        }
-    }
+    async getCart(token) {
+        const url = "https://api.almehdisolutions.com/api/Cart/GetCart";
+        const options = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` }
+        };
 
-    // Get Single Cart
-    async getCart(id) {
         try {
-            const response = await fetch(`https://dummyjson.com/carts/user/${id}`);
+            const response = await fetch(url, options);
             if (!response.ok) throw new Error("Something went wrong !");
             const cart = await response.json();
             return cart;
         } catch (error) {
-            console.log("Server Service :: Cart", error);
+            console.log("Server Service :: USER Cart", error);
         }
     }
 
     // Add Cart
-    async addCart(data, id) {
+    async addCart(cart, token) {
+
+        console.log(cart, token)
+
+        const url = 'https://api.almehdisolutions.com/api/Cart/AddToCart';
+        const options = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` },
+            body: JSON.stringify(cart)
+        };
+
         try {
-            const response = await fetch(`https://dummyjson.com/carts/add`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    userId: id,
-                    products: [data]
-                })
-            });
+            const response = await fetch(url, options);
             if (!response.ok) throw new Error("Something went wrong !");
             const addCart = await response.json();
             return addCart;
         } catch (error) {
-            console.log("Server Service :: Add Cart", error);
+            console.log("Server Service :: ADD Cart", error);
         }
     }
 
     // Update Cart
-    async updateCart(data, id) {
+    async updateCart({ cartId, quantity }, token) {
+        const url = `https://api.almehdisolutions.com/api/Cart/UpdateCart?cartId=${cartId}&quantity=${quantity}`;
+        const options = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: {}
+        };
+
         try {
-            const response = await fetch(`/api/carts/${id}`, {
-                method: 'PATCH',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    products: data
-                })
-            });
-            if (!response.ok) throw new Error("Something went wrong !");
-            const updateCart = await response.json();
+            const res = await fetch(url, options);
+            console.log(res)
+            if (!res.ok) throw new Error("Something went wrong !");
+            const updateCart = await res.json();
             return updateCart;
         } catch (error) {
-            console.log("Server Service :: Update Cart", error);
+            console.log("Server Service :: USER Cart", error);
         }
     }
 
     // Delete Cart
-    async deleteCart(productID, userID) {
+    async deleteCart(cartID, token) {
+        const url = `https://api.almehdisolutions.com/api/Cart/RemoveFromCart?cartId=${cartID}`;
+        const options = { 
+            method: 'DELETE', 
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        };
+
         try {
-            const response = await fetch(`/api/carts/${userID}`, {
-                method: 'DELETE',
-            });
+            const response = await fetch(url, options);
             if (!response.ok) throw new Error("Something went wrong !");
             const deleteCart = await response.json();
             return deleteCart;
         } catch (error) {
-            console.log("Server Service :: Delete Cart", error);
+            console.log("Server Service :: DELETE Cart", error);
         }
     }
 }

@@ -1,12 +1,13 @@
-import React from "react";
-import { Layout } from "../components";
+import React from 'react';
+import { Layout } from "../components/index";
 
-function PrivacyPolicyPage() {
+const TermsAndCondition = () => {
     return (
         <Layout>
+
             <div className="px-12 py-16 mx-auto rounded-md">
                 <h4 className="mb-4 text-lg font-bold">
-                    Privacy and Cookie Policy
+                    Terms And Conditions
                 </h4>
 
                 <p className="text-gray-600 text-sm">
@@ -64,8 +65,9 @@ function PrivacyPolicyPage() {
                 </p>
 
             </div>
+
         </Layout>
     )
 }
 
-export default PrivacyPolicyPage
+export default TermsAndCondition

@@ -6,15 +6,21 @@ import { LuShoppingCart } from "react-icons/lu";
 import { Link, useNavigate } from 'react-router-dom';
 import "./navbar.css";
 import productService from '../../services/productService';
+import { useSelector } from 'react-redux';
+import cartService from '../../services/cartService';
 
 function Navbar() {
+
+    // Get User
+    const { userData, token } = useSelector((state) => state.auth) || null;
 
     // State Variables
     const [search, setSearch] = useState("");
     const [searchProducts, setSearchProducts] = useState([]);
+    const [cart, setCart] = useState([]);
 
+    // Navigate User
     const navigate = useNavigate();
-
 
     // Debounce function to delay execution
     const debounceFunction = useCallback((callback, delay) => {
@@ -35,8 +41,8 @@ function Navbar() {
         }
 
         try {
-            const { products } = await productService.getSearchProducts(searchValue);
-            setSearchProducts(products);
+            const { resp } = await productService.getSearchProducts(searchValue);
+            setSearchProducts(resp);
         } catch (error) {
             console.log(error);
         }
@@ -55,12 +61,26 @@ function Navbar() {
         debouncedSearch(searchValue);
     };
 
+    // Get Carts Length
+    const fetchCartData = async () => {
+        try {
+            const carts = await cartService.getCart(token) || {};
+            setCart(carts);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchCartData();
+    }, [])
+
     return (
         <nav className='navbar pt-10' id='navbar'>
             <div className="xl:container container-fluid d-block">
                 <div className="row flex items-center" style={{ marginTop: "-2.3rem" }}>
                     <div className="logo-area col-lg-2 col-xl-2 col-sm-4 order-1">
-                        <Logo />
+                        <Logo filter="brightness(0) invert(1)" />
                     </div>
                     <div className="search-bar col-lg-5 col-xl-6 m-auto order-lg-2 order-3 sm:py-0 py-2">
                         <Input
@@ -84,15 +104,29 @@ function Navbar() {
                                     <span className='text-white font-bold font-sans'>My Items</span>
                                 </div>
                             </Link>
-                            <Link to={`${true ? "/profile/2" : "/login"}`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
+                            <Link to={`${token ? "/profile/2" : "/login"}`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
                                 <FaRegUser className='text-2xl text-white font-bold me-2' />
                                 <div className="info text-center md:block hidden">
-                                    <h6 className='text-white'>Sign In</h6>
+                                    <h6 className='text-white'>{token ? `${userData.first_name}` : "Sign In"}</h6>
                                     <span className='text-white font-bold font-sans'>Account</span>
                                 </div>
                             </Link>
                             <Link to={`/cart/${15}`} className="hover:cursor-pointer py-1 px-2 rounded-full transition-all duration-200 ease-in-out">
-                                <LuShoppingCart className='text-3xl text-white font-bold m-auto me-2' />
+                                <button className='relative'>
+                                    <LuShoppingCart className='text-3xl text-white font-bold m-auto' />
+                                    {
+                                        token ?
+                                            <span
+                                                class="font-extrabold position-absolute top-0 start-100 translate-middle p-2.5 bg-white w-1 h-1 flex items-center justify-center rounded-full text-red-700 text-xs"
+                                                style={{ paddingBottom: "-2rem" }}
+                                            >
+                                                {cart.length || 0} 
+                                            </span>
+                                            :
+                                            <></>
+                                    }
+
+                                </button>
                                 <h6 className='text-white mt-1 md:block hidden'>Cart</h6>
                             </Link>
                         </div>

@@ -47,11 +47,11 @@ const AllCategories = () => {
             <div className="row py-6">
                 <h3 className='text-2xl text-black text-center mb-4'>All Categories</h3>
                 {
-                    categories && categories.map(({ slug, name }) => (
+                    categories && categories.map(({ id, name }) => (
                         <div className='col-md-4 col-sm-6 bg-white border p-4 text-center'>
-                            <Link to={`/products/${slug}`}>
+                            <Link to={`/products/${id}`}>
                                 <div className="category-img">
-                                    <img src={categoryIcons[slug]} className='mx-auto mb-4 h-64 object-contain' alt={slug} />
+                                    <img src={categoryIcons[name.toLowerCase()]} className='mx-auto mb-4 h-64 object-contain' alt={name} />
                                 </div>
                                 <h4 className="uppercase category-title font-semibold font-sans text-3xl text-sky-700">{name}</h4>
                             </Link>

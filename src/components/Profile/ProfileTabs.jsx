@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { AddressManager, OrderHistoryItems, ProfileForm, ProfileInformation, WishlistItems } from '../index';
+import { AddressManager, OrderHistory, ProfileForm, ProfileInformation, Tracking } from '../index';
 import { fakeOrders } from '../Orders/FakeOrders';
-import { items } from '../Wishlist/fakeItems';
 
 const ProfileTabs = ({ selectedTab }) => {
 
     const [orders, setOrders] = useState([]);
     const [isForm, setIsForm] = useState(false);
     const [isEdit, setIsEdit] = useState(false);
+    const [addressID, setAddressID] = useState(null);
 
     const getOrders = () => {
         try {
@@ -31,21 +31,21 @@ const ProfileTabs = ({ selectedTab }) => {
         {
             title: "My Orders",
             details: (
-                <OrderHistoryItems orders={orders} />
+                <OrderHistory />
+            ),
+        },
+        {
+            title: "Order Tracking",
+            details: (
+                <Tracking />
             ),
         },
         {
             title: "Address Book",
             details: (
-                isForm ? <ProfileForm isForm={isForm} setForm={setIsForm} isEdit={isEdit} setEdit={setIsEdit} /> 
+                isForm ? <ProfileForm isForm={isForm} id={addressID} setId={setAddressID} setForm={setIsForm} isEdit={isEdit} setEdit={setIsEdit} /> 
                 : 
-                <AddressManager isForm={isForm} setForm={setIsForm} isEdit={isEdit} setEdit={setIsEdit} />
-            ),
-        },
-        {
-            title: "My Wishlist",
-            details: (
-                <WishlistItems items={items} />
+                <AddressManager isForm={isForm} id={addressID} setId={setAddressID} setForm={setIsForm} isEdit={isEdit} setEdit={setIsEdit} />
             ),
         }
     ];

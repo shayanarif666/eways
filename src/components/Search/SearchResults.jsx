@@ -1,6 +1,6 @@
 import React from 'react';
 import { Divider } from '@mui/material';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function SearchResults({
     products,
@@ -11,7 +11,7 @@ function SearchResults({
 
     // Navigate
     const handleSearchNavigate = (search) => {
-        navigate(`/products/${search}`);
+        navigate(`/product-detail/${search}`);
         updateSearch("");
     }
 
@@ -29,15 +29,15 @@ function SearchResults({
                     }}
                     subheader={<li />}
                 >
-                    {products?.slice(0, 3).map((product) => (
-                        <div className='col-xl-4 col-lg-6 col-sm-4 col-6' key={`item-${product.id}-${product.id}`} onClick={() => handleSearchNavigate(product.category)}>
-                            <img src={product.thumbnail} className='w-100' alt="" />
+                    {products?.slice(0, 5).map((product) => (
+                        <div className='col-xl-4 col-lg-6 col-sm-4 col-6' key={`item-${product.id}-${product.id}`} onClick={() => handleSearchNavigate(product.sku_id)}>
+                            <img src={product.imgPath ? product.imgPath : "https://qne.com.pk/cdn/shop/files/orgsize_48449WhatsApp_20Image_202024-11-22_20at_205.49.49_20PM.jpg?v=1732280955"} className='w-100' alt="" />
                             <h4 className='font-small mb-3'>{product.title}</h4>
                             <div className="flex items-center">
                                 <del>
-                                    <h5 className='font-semibold'>Rs.{product.price.toFixed(2)}</h5>
+                                    <h5 className='font-semibold'>Rs.{product.old_price.toFixed(2)}</h5>
                                 </del>
-                                <h5 className='font-semibold text-red-600 ms-2'>Rs.{product.price.toFixed(2)}</h5>
+                                <h5 className='font-semibold text-red-600 ms-2'>Rs.{product.new_price.toFixed(2)}</h5>
                             </div>
 
 
@@ -45,7 +45,7 @@ function SearchResults({
                     ))}
                     <Divider className='bg-gray-600 mt-5 mb-3' />
 
-                    <button onClick={() => handleSearchNavigate (products[0].category)} className='font-bold uppercase text-sm'>View All Results ({products.length})</button>
+                    <button className='font-bold uppercase text-sm'>Total Results ({products.length})</button>
                 </div>
             }
         </>

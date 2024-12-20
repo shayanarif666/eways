@@ -2,13 +2,15 @@ import React from 'react'
 import Categories from '../Categories Listing/Categories'
 import { Link } from 'react-router-dom'
 import { Divider } from '@mui/material'
+import { BiCategory } from 'react-icons/bi'
+import { IoIosArrowDown } from 'react-icons/io'
 
 function NavigationMenus() {
 
   const navMenus = [
     {
       title: "About Us",
-      slug: "about-us",
+      slug: "about",
       isActive: true
     },
     {
@@ -26,6 +28,7 @@ function NavigationMenus() {
             <div className="categories px-2 me-4" style={{ backgroundColor: "#2557aa" }}>
               <Categories />
             </div>
+
             <div className="nav-menus-list">
               {
                 navMenus && navMenus?.map(({ title, slug, isActive }) => {

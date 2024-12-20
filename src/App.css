@@ -3,9 +3,9 @@ body {
 }
 
 /* Dropdown Width */
-.css-1tktgsa-MuiPaper-root-MuiPopover-paper-MuiMenu-paper {
-    --Paper-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px !important;
-    width: 300px;
+.menu-categories {
+    --Paper-shadow: none !important;
+    width: 200px;
     border-radius: none !important;
 }
 

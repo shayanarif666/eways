@@ -2,53 +2,69 @@ export class AuthService {
     constructor() { }
 
     // Registration Service -- TODO : Complete After Backend Completion
-    async registerUser({ fullName, username, email, password, role, gender }) {
+    async registerUser({ first_name, last_name, email, password }) {
+        const url = 'https://api.almehdisolutions.com/api/User/Register';
+        const options = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ first_name, last_name, user_name: email, password }) };
+
         try {
-            const response = await fetch("", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            if (!response.ok) throw new Error("Something went wrong !");
-            return "Successfully Registered";
+            const res = await fetch(url, options)
+            if (!res.ok) throw new Error("Something went wrong !");
+            return await res.json();
         } catch (error) {
-            console.log("Server Service :: Register", error);
+            console.log("Server Service :: REGISTER", error);
         }
     }
 
     // Login Service
-    async loginUser({ username, password }) {
+    async loginUser({ email, password }) {
+        const url = 'https://api.almehdisolutions.com/api/User/Login';
+        const options = { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ user_name: email, password }) };
+
         try {
-            const res = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    username: 'emilys',
-                    password: 'emilyspass',
-                    expiresInMins: 30,
-                }),
-                credentials: 'include'
-            })
+            const res = await fetch(url, options)
             if (!res.ok) throw new Error("Something went wrong !");
             return await res.json();
         } catch (error) {
-            console.log("Server Service :: Login", error);
+            console.log("Server Service :: LOGIN", error);
         }
     }
 
     // Get Current User
-    async getCurrentUser(token) {
+    async updateProfile(data, token) {
+
+        console.log("token", token, data)
+
+        const url = "https://api.almehdisolutions.com/api/User/UpdateProfile";
+        const options = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+            body: JSON.stringify(data)
+        };
+
         try {
-            const res = await fetch('/api/auth/me', {
-                method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
-                credentials: 'include',
-            });
+            const response = await fetch(url, options);
+            console.log(response)
+            const data = await response.json();
+            console.log(data);
+            // Stored in Local Storage
+            localStorage.setItem("updatedUser", JSON.stringify(data.res));
+        } catch (error) {
+            console.log("Server Service :: USER Cart", error);
+        }
+    }
+
+    // Logout Service
+    async logout() {
+
+        const url = 'https://api.almehdisolutions.com/api/User/SignOut';
+        const options = { method: 'GET', headers: { accept: 'application/json' } };
+
+        try {
+            const res = await fetch(url, options)
+            if (!res.ok) throw new Error("Something went wrong !");
             return await res.json();
         } catch (error) {
-            console.error("Server Service :: Active User", error);
+            console.log("Server Service :: LOGOUT", error);
         }
     }
 }

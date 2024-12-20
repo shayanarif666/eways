@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 function Logo({
   className = "",
+  filter = "",
+  width = "",
+  height = "",
   ...props
 }) {
   return (
@@ -13,7 +16,7 @@ function Logo({
         alt=""
         className={`${className}`}
         {...props}
-        style={{ height: "150px", width: "150px", filter: "brightness(0) invert(1)" }}
+        style={{ height: `${height ? height : "150px"}`, width: `${width ? width : "150px"}`, filter: filter }}
       />
     </Link>
   )

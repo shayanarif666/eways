@@ -1,26 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Grid, Paper, Typography, TextField, Box, Button, Select, MenuItem, RadioGroup, FormControlLabel, Radio, FormControl, FormLabel, Divider, IconButton } from '@mui/material';
-import { useForm } from "react-hook-form"
-import { MdErrorOutline } from "react-icons/md";
+import { Container, Grid, Typography, Box, Divider } from '@mui/material';
 import { Toaster, toast } from 'react-hot-toast';
-import { useParams } from 'react-router-dom';
+import { BackDropLoader, PrevAddress, Shipment, StepList } from "../index";
+import orderService from '../../services/orderService';
+import { useSelector } from 'react-redux';
+import cartService from '../../services/cartService';
+import { loadStripe } from '@stripe/stripe-js';
+import "./css/checkout.css"
+import { DotLoader } from 'react-spinners';
 
 function Checkout() {
 
     // State Variables
     const [cart, setCart] = useState([]);
-    const [address, setAddress] = useState(null);
-    const [paymentType, setPaymentType] = useState("cash");
+    const [loading, setLoading] = useState(true);
+    const [addressID, setAddressID] = useState(null);
+    const [status, setStatus] = useState(false);
 
-    const { userId } = useParams();
+    // Get Token From Store
+    const { token } = useSelector((state) => state.auth);
 
     // Get Data From Cart
     const fetchingCartData = async () => {
+        setLoading(true);
         try {
-            const carts = await cartService.getCart(userId);
-            setCart(carts)
+            const carts = await cartService.getCart(token) || [];
+            setCart(carts);
+            setLoading(false)
         } catch (error) {
-
+            console.log(error);
+            setLoading(false);
         }
     }
 
@@ -28,146 +37,149 @@ function Checkout() {
         fetchingCartData();
     }, [])
 
-    // unique
-    const uniqueID = Date.now();
-    const subtotal = cart?.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    // subTotal
+    const subtotal = cart?.reduce((acc, item) => acc + (item.sku.new_price * item.quantity), 0);
 
-    // Save Address 
-    const { register, formState: { errors }, handleSubmit } = useForm();
-
-    const onSubmit = async (data) => {
-        const newData = { ...data, id: Math.floor(Math.random() * 100), userID: user.sub }
-        setAddress(newData);
-        // Notification Msg
-        toast.success("Successfully Add Address", {
-            position: "bottom-right",
-            autoClose: 1500,
-            theme: "colored"
-        });
+    // Add Shipment Address
+    const handleShipment = async ({ zip, city, address, address2 }) => {
+        setLoading(true);
+        const shipment_address = {
+            city,
+            state_id: 1,
+            zip,
+            address,
+            address2,
+            additional_notes: ""
+        }
+        try {
+            const shippingOrderAddress = await orderService.addShipmentAddress(shipment_address, token)
+            // Notification Msg
+            toast.success("New Address Save Successfull", {
+                position: "bottom-right",
+                autoClose: 1500,
+                theme: "colored"
+            });
+            if (shippingOrderAddress.message) {
+                setStatus((prevStatus) => !prevStatus);
+                setLoading(false);
+            }
+        } catch (error) {
+            console.log(error);
+            setLoading(false);
+        }
     }
 
-    // Handle Payment Type
-    const handlePaymentType = (e) => {
-        const paymentMethod = e.target.value;
-        setPaymentType(paymentMethod);
+
+
+    // Payment Handling
+    const handlePayment = async () => {
+        if (addressID) {
+            setLoading(true);
+            const stripe = await loadStripe("pk_test_51NpRZkJgs29DePV5fLxjVsixWCY6EdcZwwZGKwVR5PGKl0JmOOLeOQxUu2ZugAHZqExXp7S1FSti6onqjL6A0suo00Er37EL6R");
+
+            const headers = {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+    
+            const transformedData = cart.map(item => ({
+                sku: {
+                    title: item.sku.title,
+                    newPrice: item.sku.new_price
+                },
+                quantity: item.quantity
+            }))
+    
+            const response = await fetch("https://api.almehdisolutions.com/api/Order/create-checkout-session  ", {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(transformedData)
+            });
+
+            setLoading(false);
+    
+            const session = await response.json();
+    
+            const result = stripe.redirectToCheckout({
+                sessionId: session.resp
+            });
+    
+            if (result.error) {
+                console.log(result.error);
+            }
+        } else {
+            // Notification Msg
+            toast.error("Select Shipping Address", {
+                position: "bottom-right",
+                autoClose: 1500,
+                theme: "colored"
+            });
+        }
+        
     }
 
-    // Order Data Placed 
-    const orderDataPlaced = () => {
-    }
+    // Steps For Placing Order
+    const steps = [
+        'Shipping',
+        'Payment'
+    ];
 
-    // Handle Place Order 
-    const handlePlaceOrder = () => {
-    }
+    // Save Data In Local Storage
+    useEffect(() => {
+        const transformedData = cart?.map(item => ({
+            sku_id: item.sku.id,
+            quantity: item.quantity,
+            price: item.sku.new_price
+        }));
+        sessionStorage.setItem("cart", JSON.stringify(transformedData));
+        sessionStorage.setItem("subTotal", subtotal);
+    }, [cart]);
 
-    console.log(cart)
 
     return (
         <>
-            <Container sx={{ py: 4 }}>
-                <h4 className='text-2xl mb-3'>Checkout</h4>
 
+            {loading && <BackDropLoader />}
+
+            <StepList />
+
+            <Container sx={{ py: 4 }}>
                 <Grid container spacing={3}>
 
                     <Grid item xs={12} md={8}>
                         <div className='bg-white p-4'>
-                            <form action="" onSubmit={handleSubmit(onSubmit)}>
-                                <Typography variant="h6" gutterBottom>Contact information</Typography>
-
-                                {/* Error Handle */}
-                                {errors.email && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Email is required</small>}
-                                <TextField {...register("email", {
-                                    required: true, validate: {
-                                        matchPatern: (value) => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(value)
-                                    }
-                                })} sx={{ mb: 2 }} fullWidth label="Email address" margin="normal" />
-
-                                <Typography variant="h6" gutterBottom>Shipping information</Typography>
-                                <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.firstname && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />First name is required</small>}
-                                        <TextField {...register("firstname", { required: true })} fullWidth label="First name" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.lastname && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Last name is required</small>}
-                                        <TextField {...register("lastname", { required: true })} fullWidth label="Last name" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        {/* Error Handle */}
-                                        {errors.address && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Address is required</small>}
-                                        <TextField {...register("address", { required: true })} fullWidth label="Address" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        {/* Error Handle */}
-                                        {errors.appartment && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Appartment is required</small>}
-                                        <TextField {...register("appartment", { required: true })} fullWidth label="Apartment, suite, etc." margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.city && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />City is required</small>}
-                                        <TextField {...register("city", { required: true })} fullWidth label="City" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.country && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Country is required</small>}
-                                        <TextField {...register("country", { required: true })} fullWidth label="Country" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.state && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />State is required</small>}
-                                        <TextField {...register("state", { required: true })} fullWidth label="State / Province" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12} sm={6}>
-                                        {/* Error Handle */}
-                                        {errors.postcode && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Post Code is required</small>}
-                                        <TextField {...register("postcode", { required: true })} fullWidth label="Postal code" margin="normal" />
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        {/* Error Handle */}
-                                        {errors.phone && <small className='text-danger'><MdErrorOutline className='me-1' style={{ marginBottom: ".2rem" }} />Phone is required</small>}
-                                        <TextField {...register("phone", { required: true, maxLength: 11 || "Phone must be valid" })} fullWidth label="Phone" margin="normal" />
-                                    </Grid>
-
-                                    <button className='btn btn-danger rounded-none shadow mb-4 mt-2 ms-auto'>Add Address</button>
-                                </Grid>
-                            </form>
-
-                            <Grid container spacing={2}>
-                                <Grid item xs={12}>
-                                    <h6 className='mb-3 fw-bold'>Payment Method</h6>
-                                    <FormControl>
-                                        <RadioGroup
-                                            aria-labelledby="demo-radio-buttons-group-label"
-                                            defaultValue="cash"
-                                            name="radio-buttons-group"
-                                            onChange={handlePaymentType}
-                                        >
-                                            <FormControlLabel value="cash" control={<Radio />} label="Cash On Delivery" />
-                                            <FormControlLabel value="card" control={<Radio />} label="Pay With Card" />
-                                        </RadioGroup>
-                                    </FormControl>
-                                </Grid>
-                            </Grid>
+                            <Shipment onShipment={handleShipment} />
+                            <PrevAddress addressID={addressID} setID={setAddressID} status={status} />
                         </div>
                     </Grid>
 
                     <Grid item xs={12} md={4}>
-                        <div className='bg-white p-4'>
-                            <Typography variant="h6" gutterBottom>Order summary</Typography>
 
-                            {
-                                cart && cart.map((product) => (
-                                    <>
-                                        <Box display="flex" justifyContent="space-between" mb={2}>
-                                            <Typography variant="body2">{product.title}</Typography>
-                                            <Typography variant="body2">${product.price}</Typography>
-                                            <Typography variant="body2">Qty : {product.quantity}</Typography>
-                                        </Box>
-                                    </>
-                                ))
-                            }
+                        <h4 className='text-lg mb-3 font-semibold'>Order Summary</h4>
+
+                        <div className='bg-white p-4'>
+                            <div className="cart-prod mb-10">
+                                {
+                                    cart && cart.map((product) => (
+                                        <>
+                                            <div className='flex items-center'>
+                                                <img
+                                                    src={`${product.sku.imgPath ? product.sku.imgPath : "https://qne.com.pk/cdn/shop/files/orgsize_484551280797-1.jpg?v=1733728810"}`}
+                                                    className='w-20 h-20'
+                                                    alt=""
+                                                />
+                                                <div className="prod-info ms-3">
+                                                    <h6 className='text-xs'>{product.sku.title}</h6>
+                                                    <span className='text-sm font-semibold'>${product.sku.new_price.toFixed(2)}</span>
+                                                </div>
+                                                <div className="prod-qnt ms-auto">
+                                                    <span className='text-xs font-semibold'>Qty: {product.quantity}</span>
+                                                </div>
+                                            </div>
+                                        </>
+                                    ))
+                                }
+                            </div>
                             <Divider />
                             <Box display="flex" justifyContent="space-between" my={2}>
                                 <Typography variant="body2">Subtotal</Typography>
@@ -179,20 +191,21 @@ function Checkout() {
                             </Box>
                             <Box display="flex" justifyContent="space-between" my={2}>
                                 <Typography variant="body2">Taxes</Typography>
-                                <Typography variant="body2">$5.52</Typography>
+                                <Typography variant="body2">$10.00</Typography>
                             </Box>
                             <Divider />
                             <Box display="flex" justifyContent="space-between" my={2}>
                                 <Typography variant="body2">Total</Typography>
-                                <Typography variant="body2">${(subtotal + 5.52 + 5.00).toFixed(2)}</Typography>
+                                <Typography variant="body2">${(subtotal + 5.00 + 10.00).toFixed(2)}</Typography>
                             </Box>
 
-                            {
-                                paymentType === "cash" ?
-                                    <button className='btn btn-danger rounded-none shadow w-100' onClick={handlePlaceOrder}>Place Order</button>
-                                    :
-                                    <button className='btn btn-danger rounded-none shadow w-100'>Pay With Stripe</button>
-                            }
+                            <button
+                                onClick={handlePayment}
+                                className={`${loading ? "opacity-50" : ""} bg-red-700 px-${loading ? '5' : '3'} text-white hover:bg-red-800 font-semibold rounded-none shadow py-2 w-100 flex items-center justify-center`}
+                            >
+                                {loading ? <DotLoader size={20} color={"#fff"} /> : 'Place Your Order'}
+                            </button>
+
                             <Toaster />
                         </div>
                     </Grid>

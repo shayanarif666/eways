@@ -3,36 +3,21 @@ import { Box, Grid, Typography } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
 import cartService from '../../services/cartService';
 
-function CartItems({ item, quantity, onQuantity }) {
-
-    // Remove Cart
-    const handleRemoveCart = async (productID) => {
-        try {
-            const removeCart = await cartService.deleteCart(productID, userID);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    // Update Cart
-    const handleUpdateCart = async (productID) => {
-        try {
-            const updateCart = await cartService.updateCart(productID, userID);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
+function CartItems({ item, quantity, onQuantity, onRemoveProduct }) {
     return (
         <>
             <Grid container sx={{ p: 2, mt: 3, mb: 2 }} className='cart-item bg-white'>
                 <Grid item xs={3} className='me-4'>
-                    <img src={item.thumbnail} alt={item.image} style={{ width: '100%', height: '150px' }} />
+                    <img
+                        alt={"image"}
+                        src={false ? item.sku.imgPath: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
+                        style={{ width: '100%', height: '150px' }} 
+                    />
                 </Grid>
                 <Grid item xs={8}>
-                    <Typography variant="subtitle1"><strong>{item.title}</strong></Typography>
-                    <Typography className="my-2" variant="body1">{item.description} The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.</Typography>
-                    <Typography variant="body1">${item.price}</Typography>
+                    <Typography variant="subtitle1"><strong>{item.sku.title}</strong></Typography>
+                    <Typography className="my-2" variant="body1">{item.sku.description.slice(0, 80)}...</Typography>
+                    <Typography variant="body1">$ {item.sku.new_price.toFixed(2)}</Typography>
 
                     <Box mt={1}>
                         {item.inStock ? (
@@ -42,14 +27,14 @@ function CartItems({ item, quantity, onQuantity }) {
                         )}
                     </Box>
                     <Box className="d-sm-flex align-items-sm-center">
-                        <select className='form-select mt-2' style={{ width: '70px', borderRadius: 0 }} defaultValue={quantity} onChange={(e) => handleUpdateCart(item.id)}>
+                        <select className='form-select mt-2' style={{ width: '70px', borderRadius: 0 }} defaultValue={quantity} onChange={onQuantity}>
                             <option value={1}>1</option>
                             <option value={2}>2</option>
                             <option value={3}>3</option>
                             <option value={4}>4</option>
                             <option value={5}>5</option>
                         </select>
-                        <button className='btn btn-danger rounded-none shadow ms-sm-2 mt-2' onClick={() => handleRemoveCart(item.id)}>Remove From Cart</button>
+                        <button className='btn btn-danger rounded-none shadow ms-sm-2 mt-2' onClick={onRemoveProduct}>Remove From Cart</button>
                     </Box>
                 </Grid>
             </Grid>

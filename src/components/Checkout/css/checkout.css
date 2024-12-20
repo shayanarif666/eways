@@ -1,0 +1,46 @@
+.stepper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+    margin: 20px auto;
+}
+
+.step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    border: 2px solid #b62026;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: #b62026;
+    font-weight: bold;
+    position: relative;
+}
+
+.step.active .circle {
+    background-color: #b62026;
+    color: white;
+}
+
+.line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: #ccc;
+    margin: 0 10px;
+}
+
+p {
+    margin-top: .5rem;
+    font-size: 1rem;
+    color: #666;
+}

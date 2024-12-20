@@ -1,13 +1,15 @@
 import React from 'react';
 import './footer.css';
-import { Box, TextField, Button, Typography, Link } from "@mui/material";
+import { Box, TextField, Button, Typography } from "@mui/material";
 import { FaFacebookF, FaInstagram, FaTwitter, FaLinkedin, FaYoutube, FaTiktok } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoCall } from "react-icons/io5";
 import { LuClock4 } from "react-icons/lu";
 import { SiGoogleplay, SiAppstore } from "react-icons/si";
 import cashapp from "../../assets/Images/Payment Gateway/cashapp.png";
-import paypal from "../../assets/Images/Payment Gateway/paypal.png"
+import paypal from "../../assets/Images/Payment Gateway/paypal.png";
+import visa from "../../assets/Images/Payment Gateway/visa.ico"
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
@@ -38,16 +40,10 @@ const Footer = () => {
                         </h4>
                         <ul className="space-y-2">
                             <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Contact Us</Link>
+                                <Link to={`/form`} className='text-gray-400 hover:text-zinc-200 text-decoration-none'>Contact Us</Link>
                             </li>
                             <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Delivery Info</Link>
-                            </li>
-                            <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>FAQs</Link>
-                            </li>
-                            <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Naheed Loyalty</Link>
+                                <Link to={"/about"} color="inherit" className='hover:text-zinc-200 text-decoration-none'>About</Link>
                             </li>
                         </ul>
                     </div>
@@ -59,13 +55,10 @@ const Footer = () => {
                         </h4>
                         <ul className="space-y-2">
                             <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Return & Refund</Link>
+                                <Link to={"/privacy-policy"} color="inherit" className='hover:text-zinc-200 text-decoration-none'>Privacy Policy</Link>
                             </li>
                             <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Privacy Policy</Link>
-                            </li>
-                            <li className='text-sm text-zinc-400 mb-3'>
-                                <Link href="#" color="inherit" className='hover:text-zinc-200 text-decoration-none'>Terms & Conditions</Link>
+                                <Link to={"/terms"} color="inherit" className='hover:text-zinc-200 text-decoration-none'>Terms & Conditions</Link>
                             </li>
                         </ul>
                     </div>
@@ -107,6 +100,7 @@ const Footer = () => {
                     <div className="flex space-x-3 sm:mt-0 mt-2">
                         <img src={cashapp} alt="CashApp" className="h-6" />
                         <img src={paypal} alt="Paypal" className="h-6" />
+                        <img src={visa} alt="Visa" className="h-6" />
                     </div>
                 </div>
             </div>

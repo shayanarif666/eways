@@ -6,7 +6,7 @@ import { Container, Grid } from '@mui/material';
 
 function ProductDetailLoader() {
     return (
-        <Container>
+        <Container className='py-6'>
             <Grid container spacing={4}>
                 <Grid item xs={12} md={6}>
                     <Stack spacing={1}>

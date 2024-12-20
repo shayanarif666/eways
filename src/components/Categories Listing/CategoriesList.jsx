@@ -14,7 +14,12 @@ function CategoriesList({ categories, className }) {
     return (
         <>
             <div className={`${className} d-md-block d-none my-5`}>
-                <h4 className='text-2xl font-semibold text-black uppercase mb-4'>Popular Categories</h4>
+                <h4
+                    className='text-xl font-semibold text-black mb-2 font-bold'
+                    style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif" }}
+                >
+                    Popular Categories
+                </h4>
                 <Swiper
                     modules={[Navigation]}
                     slidesPerView={6}
@@ -32,13 +37,13 @@ function CategoriesList({ categories, className }) {
                 >
                     <div className="row g-4 bg-white">
                         {
-                            categories && categories.map(({ slug, name }) => {
+                            categories && categories.map(({ name, id }) => {
                                 return (
-                                    <SwiperSlide key={slug} className="p-1">
-                                        <Link to={`/products/${slug}`} style={{ textDecoration: "none", color: "#333" }} className="bg-white d-flex align-items-center justify-content-center view-categories py-3 text-center">
-                                            <div key={slug}>
+                                    <SwiperSlide key={name.toLowerCase()} className="p-1">
+                                        <Link to={`/products/${id}`} style={{ textDecoration: "none", color: "#333" }} className="bg-white d-flex align-items-center justify-content-center view-categories py-3 text-center">
+                                            <div key={name.toLowerCase()}>
                                                 <div className="category-img">
-                                                    <img src={categoryIcons[slug]} className='h-60 object-contain' alt="" /> <br />
+                                                    <img src={categoryIcons[name.toLowerCase()]} className='h-60 object-contain' alt="" /> <br />
                                                 </div>
                                                 <h6 className='d-block mt-1 text-xl uppercase font-semibold'>{name}</h6>
                                             </div>

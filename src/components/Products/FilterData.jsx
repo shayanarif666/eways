@@ -44,29 +44,7 @@ function FilterData({
                     <></>
             }
 
-            <h6 className='mb-2'>Warrenty period</h6>
-            <hr className='mb-2' />
-            <div className='mb-8'>
-                {filterData.reduce((uniqueWarren, product) => {
-                    if (!uniqueWarren.includes(product.warrantyInformation)) {
-                        uniqueWarren.push(product.warrantyInformation);
-                    }
-                    return uniqueWarren;
-                }, []).map((warrantyInformation, id) => (
-                    <div key={id} className='d-flex align-items-center'>
-                        <input
-                            type="checkbox"
-                            onChange={() => updateWarrenty(warrantyInformation)}
-                            id={warrantyInformation}
-                            value={warrantyInformation}
-                            className='mt-1'
-                        />
-                        <label htmlFor={id} style={{ fontSize: ".85rem" }} className='ms-2'>{warrantyInformation}</label>
-                    </div>
-                ))}
-            </div>
-
-            <h6 className='mb-2'>Rating</h6>
+            {/* <h6 className='mb-2'>Rating</h6>
             <hr className='mb-2' />
             <div className='ratings'>
                 {
@@ -93,15 +71,15 @@ function FilterData({
                             )
                         })
                 }
-            </div>
+            </div> */}
 
             <h6 className='mt-4 mb-2'>Price</h6>
             <hr />
-            <div className='price-range d-flex align-items-center mt-4'>
+            <div className='price-range d-lg-block d-flex d-xl-flex align-items-center mt-4'>
                 <input type="number" className='form-control me-2' value={minPrice} onChange={(e) => updateMinPrice(e.target.value)} style={{ borderRadius: "0%" }} placeholder='Min' />
                 <span className='me-2 text-secondary' style={{ fontSize: ".9rem" }}>To</span>
                 <input type="number" className='form-control me-2' value={maxPrice} onChange={(e) => updateMaxPrice(e.target.value)} style={{ borderRadius: "0%" }} placeholder='Max' />
-                <button className='btn bg-red-800 hover:bg-red-900 text-white rounded-none' onClick={() => updatePrice(minPrice, maxPrice)} >Apply</button>
+                <button className='mt-xl-0 mt-lg-3 mt-0 btn bg-red-800 hover:bg-red-900 text-white rounded-none' onClick={() => updatePrice(minPrice, maxPrice)} >Apply</button>
             </div>
         </>
     )

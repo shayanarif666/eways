@@ -10,7 +10,7 @@ function OrderHistoryItems({ orders, ...props }) {
                     <TableHead>
                         <TableRow>
                             <TableCell>
-                                <span className='font-bold text-xs flex items-center'>Invoice <FaArrowDown className='ms-1' /></span>
+                                <span className='font-bold text-xs flex items-center'>#No. <FaArrowDown className='ms-1' /></span>
                             </TableCell>
                             <TableCell>
                                 <span className='font-bold text-xs'>Order Status</span>
@@ -29,18 +29,18 @@ function OrderHistoryItems({ orders, ...props }) {
                     <TableBody>
                         {orders.map((order, index) => (
                             <TableRow key={index}>
-                                <TableCell>{order.invoice}</TableCell>
+                                <TableCell>#{index + 1}</TableCell>
                                 <TableCell>
-                                    <span className={`text-xs font-semibold px-3 py-1 ${order.status === "Cancelled" ? "text-red-600" : "text-green-600"} rounded-3xl ${order.status === "Cancelled" ? "bg-red-100" : "bg-green-100"}`}>{order.status}</span>
+                                    <span className={`text-xs font-semibold px-3 py-1 rounded-3xl bg-purple-100 text-purple-600`}>DELIVERED</span>
                                 </TableCell>
                                 <TableCell>
-                                    <span className={`text-xs font-semibold px-3 py-1 ${order.paymentStatus === "Paid" ? "text-purple-600" : "text-blue-600"} rounded-3xl ${order.paymentStatus === "Paid" ? "bg-purple-100" : "bg-blue-100"}`}>{order.paymentStatus}</span>
+                                    <span className={`text-xs font-semibold px-3 py-1 text-blue-600 rounded-3xl bg-blue-100`}>PAID</span>
                                 </TableCell>
                                 <TableCell>{order.deliveryAddress}</TableCell>
                                 <TableCell>
                                     <div className="lg:flex items-center">
-                                        <img className='max-h-10 lg:me-2' src={order.items[0].img} alt="" />
-                                        <span className='block text-xs'>{order.items[0].title}</span>
+                                        <img className='max-h-10 lg:me-2' src={order.sku[0].imgPath} alt="" />
+                                        <span className='block text-xs'>T Shirt</span>
                                     </div>
                                 </TableCell>
                             </TableRow>

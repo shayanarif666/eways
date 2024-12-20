@@ -1,16 +1,52 @@
-import React from 'react';
-import { TextField, MenuItem, Checkbox, Button, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { TextField } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import toast, { Toaster } from 'react-hot-toast';
+import authService from '../../services/authServices';
+import { DotLoader } from 'react-spinners';
 
 const Register = () => {
+
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    // Loading / Error Handling
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(false);
+
+    // Register Form
+    const handleRegisterUser = async (data) => {
+        setIsLoading(true);
+        try {
+            const createUser = await authService.registerUser(data)
+            // Notification Msg
+            toast.success("Registration Successfull", {
+                position: "bottom-right",
+                autoClose: 1500,
+                theme: "colored"
+            });
+            setIsLoading(false);
+            setError(false);
+            console.log(createUser)
+        } catch (error) {
+            console.log(error.message); // Handle any errors
+            setIsLoading(false);
+            setError(true);
+        }
+    }
+
     return (
         <div className="container mx-auto p-4">
             <h2 className="text-lg font-bold mb-5">CREATE NEW CUSTOMER ACCOUNT</h2>
-            <div className="row border p-4">
-                {/* Personal Information */}
-                <div className="col-md-6 pr-4">
-                    <h4 className="text-md font-medium mb-5">PERSONAL INFORMATION</h4>
-                    <form>
+
+            {error && <p className='text-danger text-sm mb-3'>** Already Registered</p>}
+
+            <form onSubmit={handleSubmit(handleRegisterUser)}>
+                <div className="row border p-4">
+                    {/* Personal Information */}
+                    <div className="col-md-6 pr-4">
+                        <h4 className="text-md font-medium mb-5">PERSONAL INFORMATION</h4>
+
                         {/* First Name */}
                         <label htmlFor="" className='mb-2 text-gray-500 text-sm'>First Name</label>
                         <TextField
@@ -18,7 +54,9 @@ const Register = () => {
                             variant="outlined"
                             fullWidth
                             className="mb-4"
+                            {...register("first_name", { required: true })}
                         />
+                        {errors.first_name && <span className='text-sm text-red-600 mb-4 block'>** This field is required</span>}
 
                         {/* Last Name */}
                         <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Last Name</label>
@@ -27,91 +65,30 @@ const Register = () => {
                             variant="outlined"
                             fullWidth
                             className="mb-4"
+                            {...register("last_name", { required: true })}
                         />
+                        {errors.last_name && <span className='text-sm text-red-600 mb-4 block'>** This field is required</span>}
 
-                        {/* Date of Birth */}
-                        <div className="flex gap-3 mb-4">
-                            <div className='w-100'>
-                                <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Month</label>
-                                <TextField
-                                    label="MM"
-                                    variant="outlined"
-                                    fullWidth
-                                    select
-                                >
-                                    {[...Array(12)].map((_, i) => (
-                                        <MenuItem key={i} value={i + 1}>
-                                            {i + 1}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                            </div>
-                            <div className='w-100'>
-                                <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Day</label>
-                                <TextField
-                                    label="DD"
-                                    variant="outlined"
-                                    fullWidth
-                                    select
-                                >
-                                    {[...Array(31)].map((_, i) => (
-                                        <MenuItem key={i} value={i + 1}>
-                                            {i + 1}
-                                        </MenuItem>
-                                    ))}
-                                </TextField>
-                            </div>
-                            <div className='w-100'>
-                                <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Year</label>
-                                <TextField
-                                    label="YYYY"
-                                    variant="outlined"
-                                    fullWidth
-                                    type="number"
-                                />
-                            </div>
-                        </div>
+                    </div>
 
-                        {/* Gender */}
-                        <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Gender</label>
-                        <TextField
-                            label="Gender"
-                            variant="outlined"
-                            fullWidth
-                            select
-                            className="mb-4"
-                        >
-                            {['Male', 'Female', 'Other'].map((gender, index) => (
-                                <MenuItem key={index} value={gender}>
-                                    {gender}
-                                </MenuItem>
-                            ))}
-                        </TextField>
+                    {/* Sign-In Information */}
+                    <div className="col-md-6 pl-4">
+                        <h4 className="text-md font-medium mb-5">SIGN-IN INFORMATION</h4>
 
-                    </form>
-                </div>
-
-                {/* Sign-In Information */}
-                <div className="col-md-6 pl-4">
-                    <h4 className="text-md font-medium mb-5">SIGN-IN INFORMATION</h4>
-                    <form>
-                        {/* Phone Number */}
-                        <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Phone Number</label>
-                        <TextField
-                            label="Phone Number"
-                            variant="outlined"
-                            fullWidth
-                            className="mb-4"
-                        />
-
-                        {/* Email */}
+                        {/* Username */}
                         <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Email</label>
                         <TextField
                             label="Email"
+                            type='email'
                             variant="outlined"
                             fullWidth
                             className="mb-4"
+                            {...register("email", { required: true, pattern: {
+                                value: /\S+@\S+\.\S+/,
+                                message: "Entered value does not match email format",
+                              }, })}
                         />
+                        {errors.email && <span className='text-sm text-red-600 mb-4 block'>** {errors.email.message || "This field required"}</span>}
 
                         {/* Password */}
                         <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Password</label>
@@ -121,36 +98,31 @@ const Register = () => {
                             variant="outlined"
                             fullWidth
                             className="mb-4"
+                            {...register("password", { required: true })}
                         />
+                        {errors.password && <span className='text-sm text-red-600 mb-4 block'>** This field is required</span>}
 
-                        {/* Confirm Password */}
-                        <label htmlFor="" className='mb-2 text-gray-500 text-sm'>Confrim Password</label>
-                        <TextField
-                            label="Confirm Password"
-                            type="password"
-                            variant="outlined"
-                            fullWidth
-                            className="mb-4"
-                        />
+                    </div>
 
-                    </form>
-                </div>
-
-                {/* Submit Button */}
-                <div className="mt-4">
-                    <p className='text-gray-600 text-sm mb-3'>Already Have An Account Please <Link to={`/login`} className='text-blue-400 underline
+                    {/* Submit Button */}
+                    <div className="mt-4">
+                        <p className='text-gray-600 text-sm mb-3'>Already Have An Account Please <Link to={`/login`} className='text-blue-400 underline
                     '>Login</Link></p>
-                    <button
-                        className='bg-red-800 hover:bg-red-900 px-3 py-2 text-white font-semibold'
-                    >
-                        Create an Account
-                    </button>
-                </div>
+                        <button
+                            className={`${isLoading ? "opacity-50" : ""} bg-red-800 hover:bg-red-900 transition text-white px-${isLoading ? '5' : '3'} py-2 font-medium`}
+                            disabled={isLoading ? true : false}
+                        >
+                            {isLoading ? <DotLoader size={20} color={"#fff"} /> : 'Register Account'}
+                        </button>
+                    </div>
 
-            </div>
+                    <Toaster />
+
+                </div>
+            </form>
 
         </div>
     )
 }
 
-export default Register
+export default Register;

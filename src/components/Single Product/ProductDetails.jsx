@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { CardMedia, Divider, Breadcrumbs, Link, Typography, Rating, FormControl, Select, MenuItem, InputLabel, Grid } from '@mui/material';
-import { useNavigate, useParams } from 'react-router-dom';
+import { CardMedia, Divider, Breadcrumbs, Typography, Rating, FormControl, Select, MenuItem, InputLabel, Grid } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import { GoHeart } from "react-icons/go";
 import { FiCodesandbox } from "react-icons/fi";
 import { PiCashRegisterLight } from "react-icons/pi";
 import { RiExchange2Line } from "react-icons/ri";
 import { MdOutlineNotInterested, MdNavigateNext } from "react-icons/md";
 import ProductCard from '../Products/ProductCard';
-import { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast';
 import productService from '../../services/productService';
 import { ProductDetailLoader, ReviewForm, ReviewsAndRatings } from '../index';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -17,18 +17,23 @@ import 'swiper/css/pagination';
 import { Navigation } from 'swiper/modules';
 import "./productDetail.css"
 import cartService from '../../services/cartService';
+import { useSelector } from 'react-redux';
+import favouritesService from '../../services/favouritesSlice';
 
 function ProductDetail() {
+
+    // Get From Store
+    const { userData, token } = useSelector((state) => state.auth);
 
     // State Variables For Products
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState(null);
-    const [productsByCategories, setProductsByCategories] = useState([]);
-    const [selectedImage, setSelectedImage] = useState(0); // bug
+    const [selectedImage, setSelectedImage] = useState(0);
     const [quantity, setQuantity] = useState(1);
+    const [isProductCart, setIsProductCart] = useState(false);
+    const [cart, setCart] = useState([]);
 
     const { id } = useParams();
-    const navigate = useNavigate();
 
     // Fetching Product Data
     const fetchingData = async () => {
@@ -44,77 +49,68 @@ function ProductDetail() {
     };
 
 
-    // Fetching Related Categories Products
-    const fetchingProductsbyCategoriesData = async (category) => {
+    // Get Data From Cart
+    const getCartData = async () => {
         try {
-            const { products } = await productService.getProductsByCategories(category);
-            setProductsByCategories(products);
+            const getCart = await cartService.getCart(token);
+            setCart(getCart);
+            console.log(getCart);
         } catch (error) {
-            console.error("Error fetching products by category:", error);
+            console.log(error);
         }
-    };
-
+    }
 
     useEffect(() => {
         fetchingData();
-        console.log(selectedImage)
+        getCartData();
     }, [id, selectedImage]);
-
-    useEffect(() => {
-        product && product.category ? fetchingProductsbyCategoriesData(product.category) : "";
-    }, [product, id]);
 
     // Image Changing Each Click
     const handleImage = (id) => {
         setSelectedImage(id);
     }
 
-    // Changing Quantity of Product
-
-    const handleChange = (e) => {
-        setQuantity(e.target.value);
-    };
-
-    // Calculate Discount 
-    const calculateDiscountedPrice = (originalPrice, discount) => {
-        const discountedPrice = originalPrice - (originalPrice * (discount / 100));
-        return discountedPrice;
-    };
-
     // Add To Cart
-    const handleAddToCart = async (product, userID) => {
+    const handleAddToCart = async (sku_id) => {
         try {
-            const addProduct = await cartService.addCart(product, userID);
-            console.log(addProduct)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Remove To Cart
-    const handleRemoveToCart = async (productID, userID) => {
-        try {
-            const removeProduct = await cartService.deleteCart(product, userID);
-            console.log(removeProduct)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    // Update Cart
-    const handleUpdateCart = async (productID, userID) => {
-        try {
-            const updateProduct = await cartService.updateCart(product, userID);
-            console.log(updateProduct)
+            const product = { sku_id, quantity };
+            const addProduct = await cartService.addCart(product, token);
+            // Notification Msg
+            toast.success("Add Product Cart Successfully", {
+                position: "bottom-right",
+                autoClose: 1500,
+                theme: "colored"
+            });
+            console.log(addProduct);
         } catch (error) {
             console.log(error);
         }
     }
 
     // Wislist Add
-    const handleWishlist = async (product, userID) => {
+    const handleAddWishlist = async (sku_id) => {
         // TODO : 
+        try {
+            const addFavourite = await favouritesService.addFavourite(sku_id, token);
+            // Notification Msg
+            toast.success("Product In Favourites Add Successfully", {
+                position: "bottom-right",
+                autoClose: 1500,
+                theme: "colored"
+            });
+            console.log(addFavourite);
+        } catch (error) {
+            console.log(error)
+        }
     }
+
+    // Is Product Present In Cart
+    useEffect(() => {
+        const isProductFound = cart?.some((prod) => {
+            return prod.sku_id === parseInt(id);
+        })
+        setIsProductCart(isProductFound);
+    }, [cart])
 
     return (
         <>
@@ -124,14 +120,14 @@ function ProductDetail() {
                     <Breadcrumbs separator={<MdNavigateNext />}
                         aria-label="breadcrumb">
                         <Typography style={{ fontSize: ".9rem" }} color="#999">Home</Typography>
-                        <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.category[0].toUpperCase() + product.category.slice(1)}</Typography>
+                        <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.product.relatedProduct[0].category_name}</Typography>
                         <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.title}</Typography>
                     </Breadcrumbs>
                 </div>
 
                 {loading && <ProductDetailLoader />}
 
-                <div className="container mt-3 mx-auto">
+                {!loading && <div className="container mt-3 mx-auto">
                     {product &&
                         <>
                             <Grid container className='product-detail-container p-4' style={{ backgroundColor: "#fff" }}>
@@ -139,7 +135,7 @@ function ProductDetail() {
                                 <Grid item xs={12} md={5} lg={7} sx={{ pr: 3 }}>
                                     <CardMedia
                                         component="img"
-                                        image={product.images[selectedImage]}
+                                        image={product.imgPath ? product.images[selectedImage] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYFhNLjRKHgrAPc6QcPbyLKcqHWmrMS6ZOqg&s"}
                                         alt="Product Image"
                                         sx={{ mb: 2, height: "600px", objectFit: 'contain' }}
                                     />
@@ -147,7 +143,7 @@ function ProductDetail() {
                                     <Divider style={{ backgroundColor: "#ddd", marginTop: "-.5rem" }} />
 
                                     <Grid container spacing={2} sx={{ pt: 2 }}>
-                                        {product?.images.map((image, index) => (
+                                        {product.images?.map((image, index) => (
                                             <Grid item key={image}>
                                                 <CardMedia
                                                     component="img"
@@ -169,7 +165,7 @@ function ProductDetail() {
                                     <div className="product-rating mb-2">
                                         <div className='d-flex align-items-center'>
                                             <Rating className='d-sm-flex d-none' name="read-only" value={product.rating} readOnly />
-                                            <small>{product.rating} Ratings | {product.reviews.length} Peoples Reviews</small>
+                                            <small>{product.averageRating} Ratings | {product.product.comments.length} Peoples Reviews</small>
                                         </div>
                                     </div>
                                     <div className="product-brand mb-1">
@@ -178,21 +174,19 @@ function ProductDetail() {
                                     </div>
                                     <div className="product-brand mb-2">
                                         <span className='brand-name'>Category :</span>
-                                        <span className='brand-value'>{product.category[0].toUpperCase() + product.category.slice(1)}</span>
+                                        <span className='brand-value'>{product.product.relatedProduct[0]?.category_name}</span>
                                     </div>
                                     <div className="product-price">
-                                        <span className='total-price'>Rs. {product.discountPercentage > 0 ? calculateDiscountedPrice(product.price, product.discountPercentage).toFixed(2) : product.price}</span>
+                                        <span className='total-price'>Rs. {product.new_price > 0 ? product.new_price.toFixed(2) : product.old_price.toFixed(2)} </span>
                                     </div>
                                     <div className="product-discount mb-2">
                                         {
-                                            product.discountPercentage > 0 ?
+                                            product.new_price > 0 ?
                                                 <>
-                                                    <del className='actual-price'>Rs. {product.price}</del>
-                                                    <small className='actual-discount'>-{product.discountPercentage} %</small>
+                                                    <del className='actual-price'>Rs. {product.old_price.toFixed(2)}</del>
                                                 </>
                                                 : ""
                                         }
-
                                     </div>
 
                                     <p className='text-sm text-gray-600 mt-3'>Maximum quantity allowed is 5</p>
@@ -205,7 +199,7 @@ function ProductDetail() {
                                                 id="demo-simple-select"
                                                 value={quantity}
                                                 label="Quantity"
-                                                onChange={(e) => handleChange(e)}
+                                                onChange={(e) => setQuantity(e.target.value)}
                                             >
                                                 <MenuItem value={1}>1</MenuItem>
                                                 <MenuItem value={2}>2</MenuItem>
@@ -216,19 +210,22 @@ function ProductDetail() {
                                         </FormControl> <br />
 
                                         <button
-                                            onClick={() => handleAddToCart(product, 7)}
-                                            className='md:w-3/5 w-full rounded-none btn bg-red-600 hover:bg-red-700 font-semibold text-white shadow mt-3 md:ms-4'
+                                            type='button'
+                                            onClick={() => handleAddToCart(product.id)}
+                                            className={`${isProductCart ? "opacity-50" : ""} md:w-3/5 w-full rounded-none bg-red-600 ${isProductCart ? "" : "hover:bg-red-700"} font-semibold text-white shadow mt-3 md:ms-4`}
                                             style={{ padding: "0.7rem 3.5rem", fontSize: "1.1rem" }}
+                                            disabled={isProductCart ? true : false}
                                         >
                                             Add to Cart
                                         </button>
 
                                         <div className="product-store md:ms-3 mt-3 md:w-1/5 w-full">
-                                            <GoHeart className='text-gray-60 text-5xl border border-gray-400 rounded-full p-2 hover:bg-red-200' />
+                                            <GoHeart onClick={() => handleAddWishlist(product.id)} className='text-gray-60 text-5xl border border-gray-400 rounded-full p-2 hover:bg-red-400 hover:text-white transition-all cursor-pointer' />
                                         </div>
-                                    </div>
 
-                                    <Toaster />
+                                        <Toaster />
+
+                                    </div>
 
                                     <div className="d-block">
                                         <div className="delivery-occurances mt-3">
@@ -283,7 +280,7 @@ function ProductDetail() {
                                                     <MdOutlineNotInterested />
                                                 </div>
                                                 <div className="delivery-availibility-status">
-                                                    <p>{product.warrantyInformation}</p>
+                                                    <p>3 Months Warrenty Period</p>
                                                 </div>
                                             </div>
 
@@ -304,7 +301,7 @@ function ProductDetail() {
                                         <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="false">Description</button>
                                     </li>
                                     <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reviews ({product.reviews.length})</button>
+                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reviews</button>
                                     </li>
                                 </ul>
                                 <Divider className='bg-gray-400' sx={{ marginTop: "-1rem" }} />
@@ -312,39 +309,64 @@ function ProductDetail() {
                                     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
                                         <div className="item-detail p-4">
 
-                                            <div className="d-flex align-items-center">
-                                                <span style={{ fontSize: ".9rem" }}>Product Dimension :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.dimensions.width} x {product.dimensions.height} x {product.dimensions.depth}</span>
+                                            <div className="flex items-center justify-around">
+                                                <div className="d-flex align-items-center">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Product Dimension :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.width} x {product.length}</span>
+                                                </div>
+
+                                                <div className="d-flex align-items-center">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Weight :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.weight} Kilogram</span>
+                                                </div>
                                             </div>
 
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>Weight :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.weight} Kilogram</span>
+                                            <div className="flex items-center justify-around">
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Modal :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.model}</span>
+                                                </div>
+
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Created Product :</span>
+                                                    {/* <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.meta.createdAt.replace("T", " ").slice(0, 10)}</span> */}
+                                                </div>
                                             </div>
 
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>Barcode :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.meta.barcode}</span>
+                                            <div className="flex items-center justify-around">
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Minimum Item Quantity :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>1 Piece</span>
+                                                </div>
+
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Maximum Item Quantity :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>5 Pieces</span>
+                                                </div>
                                             </div>
 
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>Created Product :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.meta.createdAt.replace("T", " ").slice(0, 10)}</span>
+                                            <div className="flex items-center justify-around">
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>SKU :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.sku_name}</span>
+                                                </div>
+
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Vendor :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.vendor_id}</span>
+                                                </div>
                                             </div>
 
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>Minimum Item Quantity :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.minimumOrderQuantity} Pieces</span>
-                                            </div>
+                                            <div className="flex items-center justify-around">
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Promotion Code :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.promotion}</span>
+                                                </div>
 
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>Maximum Item Quantity :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>5 Pieces</span>
-                                            </div>
-
-                                            <div className="d-flex align-items-center mt-4">
-                                                <span style={{ fontSize: ".9rem" }}>SKU :</span>
-                                                <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.sku} Pieces</span>
+                                                <div className="d-flex align-items-center mt-4">
+                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Condition :</span>
+                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.condition}</span>
+                                                </div>
                                             </div>
 
                                         </div>
@@ -369,7 +391,7 @@ function ProductDetail() {
                                                 <h5 className='mt-1 uppercase text-black font-semibold text-sm'>{product.title}</h5>
                                             </div>
 
-                                            <ReviewForm />
+                                            <ReviewForm productId={product.product_id} skuId={product.id} />
 
                                         </div>
                                     </div>
@@ -398,10 +420,10 @@ function ProductDetail() {
                                 >
                                     <div className="row">
                                         {
-                                            productsByCategories?.filter((prod) => prod.id !== parseInt(id)).slice(0, 18).map((product) => {
+                                            product.product.relatedProduct.filter((prod) => prod.sku_id !== parseInt(id)).map((product) => {
                                                 return (
                                                     <SwiperSlide key={product.id} className="pr-4">
-                                                        <ProductCard product={product} discountPrice={calculateDiscountedPrice} />
+                                                        <ProductCard product={product} />
                                                     </SwiperSlide>
                                                 )
                                             })
@@ -412,7 +434,7 @@ function ProductDetail() {
                             </Grid>
                         </>
                     }
-                </div>
+                </div>}
             </section>
         </>
     )
