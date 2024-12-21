@@ -41,7 +41,8 @@ function ProductDetail() {
         try {
             const data = await productService.getProduct(id);
             setProduct(data);
-            setLoading(false)
+            setLoading(false);
+            console.log(data)
         } catch (error) {
             console.log(error)
             setLoading(false);
@@ -135,7 +136,7 @@ function ProductDetail() {
                                 <Grid item xs={12} md={5} lg={7} sx={{ pr: 3 }}>
                                     <CardMedia
                                         component="img"
-                                        image={product.imgPath ? product.images[selectedImage] : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYFhNLjRKHgrAPc6QcPbyLKcqHWmrMS6ZOqg&s"}
+                                        image={product.imgPath ? product.images[selectedImage] : "https://airedalecooling.com/wp-content/uploads/2017/07/runner-air-con-maintenance.png"}
                                         alt="Product Image"
                                         sx={{ mb: 2, height: "600px", objectFit: 'contain' }}
                                     />

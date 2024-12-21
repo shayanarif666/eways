@@ -34,8 +34,8 @@ function ProductCard({
     }
     
     // Discount Percentage
-    const calculateDiscountedPrice = (originalPrice, discount) => {
-        const discountedPrice = Math.round(originalPrice - (originalPrice * (discount / 100)));
+    const calculateDiscountedPrice = (newPrice, oldPrice) => {
+        const discountedPrice = ((oldPrice - newPrice) / oldPrice) * 100;
         return discountedPrice;
     };
 
@@ -57,8 +57,8 @@ function ProductCard({
                             <em>New</em>
                         </div>
                     </div>
-                    <p>
-                        {product.title}....
+                    <p className='text-sm'>
+                        {product.title.slice(0, 30)}....
                     </p>
                     {
                         isDescription ?
@@ -68,11 +68,11 @@ function ProductCard({
                             :
                             <></>
                     }
-                    <h6>Rs. {product.new_price.toFixed(2)}</h6>
+                    <h6>${product.new_price.toFixed(2)}</h6>
                     {
                         product.new_price ?
                             <div>
-                                <del className='me-2'>Rs.{product.old_price.toFixed(2)}</del>
+                                <del className='me-2'>${product.old_price.toFixed(2)}</del>
                             </div>
                             : ""
                     }

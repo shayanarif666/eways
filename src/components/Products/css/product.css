@@ -78,7 +78,7 @@ body {
 }
 
 .card-box p {
-    font-size: 1rem;
+    font-size: .85rem;
     margin-top: 0.8rem;
     color: #111 !important;
     font-family: Verdana, Geneva, Tahoma, sans-serif;

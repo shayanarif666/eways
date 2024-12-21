@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -10,6 +10,7 @@ import { categoryIcons } from './CategoryIcons';
 function CategoriesList({ categories, className }) {
 
     const [loading, setLoading] = useState(true);
+    const [iconKeys, setIconKeys] = useState(null);
 
     return (
         <>
@@ -37,7 +38,7 @@ function CategoriesList({ categories, className }) {
                 >
                     <div className="row g-4 bg-white">
                         {
-                            categories && categories.map(({ name, id }) => {
+                            categories && categories.slice(0, 8).map(({ name, id }) => {
                                 return (
                                     <SwiperSlide key={name.toLowerCase()} className="p-1">
                                         <Link to={`/products/${id}`} style={{ textDecoration: "none", color: "#333" }} className="bg-white d-flex align-items-center justify-content-center view-categories py-3 text-center">
