@@ -5,14 +5,14 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import { useMediaQuery } from '@mui/material';
 
-const StepList = ({ stepper, status = null }) => {
+const StepList = ({ stepper, status }) => {
 
   const isSmallScreen = useMediaQuery("(max-width: 400px)");
 
   return (
     <Box sx={{ width: '100%' }}>
       <Stepper
-        activeStep={stepper[status - 1]}
+        activeStep={status}
         alternativeLabel
         orientation={isSmallScreen ? "vertical" : "horizontal"}
       >

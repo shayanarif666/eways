@@ -46,9 +46,9 @@ const Tracking = () => {
 
   // Stepper
   const steps = [
-    'APPROVED',
-    'SHIPPED',
-    'DELIVERED',
+    'NEW',
+    'PACKED',
+    'FULFILLED',
   ];
 
   useEffect(() => {
