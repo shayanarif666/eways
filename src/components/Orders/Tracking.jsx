@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 const Tracking = () => {
 
   // State Variables
-  const [tracking, setTracking] = useState(null);
+  const [tracking, setTracking] = useState([]);
   const [address, setAddress] = useState(null);
   const [loading, setLoading] = useState(false);
   const [update, setUpdate] = useState(false);
@@ -46,9 +46,9 @@ const Tracking = () => {
 
   // Stepper
   const steps = [
-    'NEW',
+    'CONFIRMED',
     'PACKED',
-    'FULFILLED',
+    'DELIVERED',
   ];
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Tracking = () => {
       {loading && <BackDropLoader />}
 
       {
-        tracking && <div className="mx-auto bg-inherit rounded-none border p-6">
+        tracking.length > 0 ? <div className="mx-auto bg-inherit rounded-none border p-6">
           <h1 className="text-xl font-bold mb-2">
             Order Number <span className="text-red-700">#{tracking[0].id}</span>
           </h1>
@@ -121,6 +121,12 @@ const Tracking = () => {
             <p className="text-lg font-bold">Total: ${tracking[0].total_amount_paid.toFixed(2)}</p>
           </div>
         </div>
+          :
+          <div className='d-flex align-items-center justify-content-center text-center'>
+            <div>
+              <p className='text-gray-500'>No Order Place Right Now.</p>
+            </div>
+          </div>
       }
     </>
   )

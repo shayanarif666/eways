@@ -19,9 +19,6 @@ function OrderHistoryItems({ orders, ...props }) {
                                 <span className='font-bold text-xs'>Payment Status</span>
                             </TableCell>
                             <TableCell>
-                                <span className='font-bold text-xs'>Delivery Address</span>
-                            </TableCell>
-                            <TableCell>
                                 <span className='font-bold text-xs'>Products</span>
                             </TableCell>
                         </TableRow>
@@ -36,11 +33,10 @@ function OrderHistoryItems({ orders, ...props }) {
                                 <TableCell>
                                     <span className={`text-xs font-semibold px-3 py-1 text-blue-600 rounded-3xl bg-blue-100`}>PAID</span>
                                 </TableCell>
-                                <TableCell>{order.deliveryAddress}</TableCell>
                                 <TableCell>
                                     <div className="lg:flex items-center">
-                                        <img className='max-h-10 lg:me-2' src={order.sku[0].imgPath} alt="" />
-                                        <span className='block text-xs'>T Shirt</span>
+                                        <img className='max-h-10 lg:me-2' src={order.imgPath ? order.imgPath : "https://www.orientmarketing.com.pk/wp-content/uploads/2020/07/ductless-air-conditioner.jpg"} alt="" />
+                                        <span className='block text-xs'>{order.title}</span>
                                     </div>
                                 </TableCell>
                             </TableRow>
