@@ -1,13 +1,14 @@
 /* Profile Tabs Color Change */
-.profile-tabs .css-1usuzwp-MuiButtonBase-root-MuiTab-root {
+.profile-tabs button[aria-selected = "true"],
+.profile-tabs button[aria-selected = "false"] {
     text-transform: capitalize;
     margin: auto;
     padding: 0% !important;
 }
-.profile-tabs .css-1usuzwp-MuiButtonBase-root-MuiTab-root.Mui-selected {
+.profile-tabs button[aria-selected = "true"] {
     color: #b62026 !important;
     text-transform: capitalize;
 }
-.profile-tabs .css-oewvya-MuiTabs-indicator {
+.profile-tabs span.MuiTabs-indicator {
     display: none !important;
 }

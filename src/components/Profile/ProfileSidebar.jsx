@@ -59,7 +59,7 @@ function ProfileSidebar({ onTabChange }) {
                     <Tab label="Address Book" />
                 </Tabs>
                 <div className="text-center mt-2">
-                    <button className="text-md text-gray-600" onClick={handleLogout}>Logout</button>
+                    <button className="text-sm text-gray-600" onClick={handleLogout}>Logout</button>
                 </div>
                 <Toaster />
             </div>
