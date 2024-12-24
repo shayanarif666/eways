@@ -85,7 +85,7 @@ const ProfileInformation = () => {
                         <TextField
                             label="Email"
                             fullWidth
-                            defaultValue={updatedUser ? updatedUser.user_name : userData.username}
+                            defaultValue={updatedUser ? updatedUser.userName : userData.user_name}
                             className="mb-4"
                             {...register("username", { required: true })}
                         />
