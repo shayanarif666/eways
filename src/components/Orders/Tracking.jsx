@@ -13,7 +13,8 @@ const Tracking = () => {
   const [update, setUpdate] = useState(false);
 
   // Access Token
-  const { token } = useSelector((state) => state.auth);
+  const { token, userData } = useSelector((state) => state.auth);
+  console.log("user", userData)
 
   // Tracking Order
   const fetchTracking = async () => {
@@ -36,7 +37,6 @@ const Tracking = () => {
       if (tracking.length > 0) {
         const orderAddress = await orderService.getShipmentAddress(token);
         const findAddress = orderAddress.find((address) => address.id === tracking[0].address_id);
-        console.log(findAddress)
         setAddress(findAddress);
       }
     } catch (error) {
@@ -79,8 +79,8 @@ const Tracking = () => {
           <div className="border-t border-b py-4 mb-6">
             <div className="mb-4">
               <h2 className="text-lg font-semibold">Customer Details</h2>
-              <p className="text-gray-600">Customer Name: Muhammad Shayan</p>
-              <p className="text-gray-600">Customer Email: shayanarif666@gmail.com</p>
+              <p className="text-gray-600">Customer Name: {userData.first_name} {userData.last_name}</p>
+              <p className="text-gray-600">Customer Email: {userData.user_name}</p>
             </div>
             <div className="mb-4">
               <h2 className="text-lg font-semibold">Address Details</h2>
@@ -101,8 +101,8 @@ const Tracking = () => {
                   className="w-16 h-16 object-cover rounded-lg"
                 />
                 <div className="flex-1">
-                  <p className="font-medium">{tracking[0].sku.title}</p>
-                  <p className="text-gray-500">{tracking[0].sku.description}</p>
+                  <p className="font-medium">{tracking[0].sku.title?.slice(0, 30)}...</p>
+                  <p className="text-gray-500">{tracking[0].sku.description?.slice(0, 70)}...</p>
                 </div>
                 <div>
                   <p>{tracking[0].sku.sku_name}</p>
