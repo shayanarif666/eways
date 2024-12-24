@@ -80,12 +80,12 @@ const ProfileInformation = () => {
 
                 <div className="name md:flex items-center justify-between">
                     <div className="w-full me-3">
-                        <label htmlFor="" className="font-semibold text-gray-600 mb-3">Username</label>
+                        <label htmlFor="" className="font-semibold text-gray-600 mb-3">Email</label>
                         {/* Last Name */}
                         <TextField
-                            label="Username"
+                            label="Email"
                             fullWidth
-                            defaultValue={updatedUser ? updatedUser.userName : userData.username}
+                            defaultValue={updatedUser ? updatedUser.user_name : userData.username}
                             className="mb-4"
                             {...register("username", { required: true })}
                         />
