@@ -31,7 +31,8 @@ const PrevAddress = ({ addressID, setID, status }) => {
     // Address ID
     const handleAddressId = (addressID) => {
         setID(addressID);
-        sessionStorage.setItem("addressId", JSON.stringify(addressID))
+        sessionStorage.setItem("addressId", JSON.stringify(addressID));
+        localStorage.setItem("addressId", JSON.stringify(addressID))
     }
 
     return (

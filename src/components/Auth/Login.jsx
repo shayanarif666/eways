@@ -35,12 +35,16 @@ function Login() {
                     theme: "colored"
                 });
                 setIsLoading(false);
-                console.log(accessToken)
+                console.log(accessToken);
 
                 // Token aur expiry time ko localStorage mein store karein
                 sessionStorage.setItem('user', JSON.stringify(accessToken.res));
                 sessionStorage.setItem('token', accessToken.res.token);
                 sessionStorage.setItem('expire_at', accessToken.res.expire_at);
+
+                // Token aur expiry time ko localStorage mein store karein
+                localStorage.setItem('token', accessToken.res.token);
+
                 // Redirect onto home page
                 setTimeout(() => {
                     navigate("/");

@@ -133,6 +133,8 @@ function Checkout() {
         }));
         sessionStorage.setItem("cart", JSON.stringify(transformedData));
         sessionStorage.setItem("subTotal", subtotal);
+        localStorage.setItem("cart", JSON.stringify(transformedData));
+        localStorage.setItem("subTotal", subtotal);
     }, [cart]);
 
 

@@ -17,10 +17,10 @@ const Success = () => {
   const [loading, setLoading] = useState(true);
 
   // Get Token
-  const token = sessionStorage.getItem("token");
-  const addressId = JSON.parse(sessionStorage.getItem("addressId"));
-  const cart = JSON.parse(sessionStorage.getItem("cart")) || [];
-  const subtotal = JSON.parse(sessionStorage.getItem("subTotal"));
+  const token = localStorage.getItem("token");
+  const addressId = JSON.parse(localStorage.getItem("addressId"));
+  const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const subtotal = JSON.parse(localStorage.getItem("subTotal"));
 
   useEffect(() => {
     const fetchInvoice = async () => {
