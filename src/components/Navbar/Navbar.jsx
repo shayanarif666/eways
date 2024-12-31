@@ -18,6 +18,7 @@ function Navbar() {
     const [search, setSearch] = useState("");
     const [searchProducts, setSearchProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    const [update, setUpdate] = useState(false);
 
     // Navigate User
     const navigate = useNavigate();
@@ -66,6 +67,7 @@ function Navbar() {
         try {
             const carts = await cartService.getCart(token) || {};
             setCart(carts);
+            setUpdate(!update)
         } catch (error) {
             console.log(error);
         }
@@ -73,7 +75,7 @@ function Navbar() {
 
     useEffect(() => {
         fetchCartData();
-    }, [])
+    }, [update])
 
     return (
         <nav className='navbar pt-10' id='navbar'>

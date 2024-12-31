@@ -81,7 +81,7 @@ function Checkout() {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             }
-    
+
             const transformedData = cart.map(item => ({
                 sku: {
                     title: item.sku.title,
@@ -89,7 +89,7 @@ function Checkout() {
                 },
                 quantity: item.quantity
             }))
-    
+
             const response = await fetch("https://api.almehdisolutions.com/api/Order/create-checkout-session  ", {
                 method: "POST",
                 headers: headers,
@@ -97,13 +97,13 @@ function Checkout() {
             });
 
             setLoading(false);
-    
+
             const session = await response.json();
-    
+
             const result = stripe.redirectToCheckout({
                 sessionId: session.resp
             });
-    
+
             if (result.error) {
                 console.log(result.error);
             }
@@ -115,7 +115,7 @@ function Checkout() {
                 theme: "colored"
             });
         }
-        
+
     }
 
     // Steps For Placing Order
@@ -162,24 +162,27 @@ function Checkout() {
                         <div className='bg-white p-4'>
                             <div className="cart-prod mb-10">
                                 {
-                                    cart && cart.map((product) => (
-                                        <>
-                                            <div className='flex items-center'>
-                                                <img
-                                                    src={`${product.sku.imgPath ? product.sku.imgPath : "https://qne.com.pk/cdn/shop/files/orgsize_484551280797-1.jpg?v=1733728810"}`}
-                                                    className='w-20 h-20'
-                                                    alt=""
-                                                />
-                                                <div className="prod-info ms-3">
-                                                    <h6 className='text-xs'>{product.sku.title}</h6>
-                                                    <span className='text-sm font-semibold'>${product.sku.new_price.toFixed(2)}</span>
+                                    cart && cart.map((product) => {
+                                        console.log("checkout", product)
+                                        return (
+                                            <>
+                                                <div className='flex items-center'>
+                                                    <img
+                                                        src={`${product.sku.imgPath ? `https://admin.almehdisolutions.com/${product.sku.imgPath}` : "https://qne.com.pk/cdn/shop/files/orgsize_484551280797-1.jpg?v=1733728810"}`}
+                                                        className='w-20 h-20'
+                                                        alt=""
+                                                    />
+                                                    <div className="prod-info ms-3">
+                                                        <h6 className='text-xs'>{product.sku.title}</h6>
+                                                        <span className='text-sm font-semibold'>${product.sku.new_price.toFixed(2)}</span>
+                                                    </div>
+                                                    <div className="prod-qnt ms-auto">
+                                                        <span className='text-xs font-semibold'>Qty: {product.quantity}</span>
+                                                    </div>
                                                 </div>
-                                                <div className="prod-qnt ms-auto">
-                                                    <span className='text-xs font-semibold'>Qty: {product.quantity}</span>
-                                                </div>
-                                            </div>
-                                        </>
-                                    ))
+                                            </>
+                                        )
+                                    })
                                 }
                             </div>
                             <Divider />

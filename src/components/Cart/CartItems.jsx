@@ -4,13 +4,14 @@ import { Toaster } from 'react-hot-toast';
 import cartService from '../../services/cartService';
 
 function CartItems({ item, quantity, onQuantity, onRemoveProduct }) {
+    console.log(item)
     return (
         <>
             <Grid container sx={{ p: 2, mt: 3, mb: 2 }} className='cart-item bg-white'>
                 <Grid item xs={3} className='me-4'>
                     <img
                         alt={"image"}
-                        src={false ? item.sku.imgPath: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
+                        src={item.sku.imgPath ? `https://admin.almehdisolutions.com/${item.sku.imgPath}`: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
                         style={{ width: '100%', height: '150px', objectFit: "cover" }} 
                     />
                 </Grid>
