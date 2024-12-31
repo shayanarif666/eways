@@ -31,7 +31,7 @@ function SearchResults({
                 >
                     {products?.slice(0, 5).map((product) => (
                         <div className='col-xl-4 col-lg-6 col-sm-4 col-6' key={`item-${product.id}-${product.id}`} onClick={() => handleSearchNavigate(product.sku_id)}>
-                            <img src={product.imgPath ? product.imgPath : "https://qne.com.pk/cdn/shop/files/orgsize_48449WhatsApp_20Image_202024-11-22_20at_205.49.49_20PM.jpg?v=1732280955"} className='w-100' alt="" />
+                            <img style={{ height: "150px", objectFit: "cover" }} src={product.imgPath ? `https://admin.almehdisolutions.com/${product.imgPath}` : "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"} className='w-100' alt="" />
                             <h4 className='font-small mb-3'>{product.title.slice(0, 30)}...</h4>
                             <div className="flex items-center">
                                 <del>
