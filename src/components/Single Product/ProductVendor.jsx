@@ -38,7 +38,7 @@ const ProductVendor = ({ product }) => {
                                 </div>
                             </div>
 
-                            <div className="block sm:flex items-center sm:ustify-around">
+                            <div className="block sm:flex items-center sm:justify-around">
                                 <div className="d-flex align-items-center mt-4">
                                     <span className='font-semibold' style={{ fontSize: ".9rem" }}>Modal :</span>
                                     <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.model}</span>
