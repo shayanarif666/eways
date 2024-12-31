@@ -35,7 +35,7 @@ function OrderHistoryItems({ orders, ...props }) {
                                 </TableCell>
                                 <TableCell>
                                     <div className="lg:flex items-center">
-                                        <img className='max-h-10 lg:me-2' src={order.imgPath ? order.imgPath : "https://www.orientmarketing.com.pk/wp-content/uploads/2020/07/ductless-air-conditioner.jpg"} alt="" />
+                                        <img className='max-h-10 lg:me-2' src={order.imgPath ? `https://admin.almehdisolutions.com/${order.imgPath}` : "https://www.orientmarketing.com.pk/wp-content/uploads/2020/07/ductless-air-conditioner.jpg"} alt="" />
                                         <span className='block text-xs'>{order.title?.slice(0, 30)}...</span>
                                     </div>
                                 </TableCell>

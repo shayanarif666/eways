@@ -69,7 +69,7 @@ const AddressManager = ({
                     {
                         address && address.reverse().map((add) => (
                             <>
-                                <div className="col-6">
+                                <div className="col-sm-6">
                                     {/* Default Shipping Address */}
                                     <div className="border">
                                         <CardContent>

@@ -94,9 +94,9 @@ const Tracking = () => {
           <div className="mb-6">
             <h2 className="text-lg font-semibold mb-4">Items Ordered</h2>
             <div className="border-b py-4">
-              <div className="flex items-center space-x-4">
+              <div className="sm:flex items-center space-x-4">
                 <img
-                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzDAkqV2j2-__LLrK039kkx0TyA9cog7wgA&s"
+                  src={`https://admin.almehdisolutions.com/${tracking[0].sku.imgPath}`}
                   alt="Dior Tribales Earrings"
                   className="w-16 h-16 object-cover rounded-lg"
                 />

@@ -42,12 +42,12 @@ function OrderHistory() {
 
                 <Divider className='mb-5 bg-gray-400 mt-4' />
 
-                <div className="flex items-center justify-between mb-4">
+                <div className="sm:flex items-center justify-between mb-4">
                     <div className="w-full">
                         <h6 className='text-sm font-semibold'>Order details</h6>
                         <p className='mt-1 font-sans text-sm'>View your recent orders and payments</p>
                     </div>
-                    <div className="w-full">
+                    <div className="w-full mt-3 sm:mt-0">
                         <input type="search" className='ms-auto form-control mb-4 border-0 rounded-none py-2 focus:shadow-none' placeholder='Search Orders' />
                     </div>
                 </div>
