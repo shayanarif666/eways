@@ -28,3 +28,17 @@
         max-height: 100% !important;
     }
 }
+
+@media (max-width:650px) {
+    #navbar img {
+        width: 100px !important;
+        height: 100px !important;
+    }
+}
+
+@media (max-width:400px) {
+    #navbar img {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}

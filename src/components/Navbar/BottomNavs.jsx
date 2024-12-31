@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Box, BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { FaHome, FaRegUser } from "react-icons/fa";
 import { BiCategory } from "react-icons/bi";
@@ -7,15 +7,28 @@ import "./navbar.css"
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 
 function BottomNavs() {
-    const [value, setValue] = useState(0);
+    const [value, setValue] = useState("home");
 
     // Navigate
     const navigate = useNavigate();
 
-    // Redirect pages
-    const handleRedirect = (endPoint) => {
-        navigate(endPoint);
-    }
+    // Set the initial value based on the current path
+    useEffect(() => {
+        if (location.pathname === `/profile/${2}`) {
+            setValue("profile");
+        } else if (location.pathname === "/categories") {
+            setValue("categories");
+        } else if (location.pathname === `/cart/${15}`) {
+            setValue("cart");
+        } else {
+            setValue("home");
+        }
+    }, [location.pathname]);
+
+    const changePath = (path) => {
+        navigate(path);
+    };
+
 
     return (
         <Box>
@@ -28,27 +41,33 @@ function BottomNavs() {
                 }}
             >
                 <BottomNavigationAction
-                    onClick={() => handleRedirect("/")}
+                    onClick={() => changePath("/")}
                     className='bottom-nav'
                     sx={{ fontSize: "20px" }}
-                    label='Home'
+                    label='home'
+                    value="home"
                     icon={<FaHome />}
                 />
                 <BottomNavigationAction
-                    onClick={() => handleRedirect(`/cart/${15}`)}
+                    onClick={() => changePath(`/cart/${15}`)}
                     className='bottom-nav'
                     sx={{ fontSize: "20px" }}
-                    label='Cart' icon={<IoIosCart />}
+                    value="cart"
+                    label='cart' icon={<IoIosCart />}
                 />
                 <BottomNavigationAction
-                    onClick={() => handleRedirect(`/profile/${2}`)}
+                    onClick={() => changePath(`/profile/${2}`)}
                     className='bottom-nav'
                     sx={{ fontSize: "20px" }}
-                    label='Profile' icon={<FaRegUser />}
+                    value="profile"
+                    label='profile' icon={<FaRegUser />}
                 />
                 <BottomNavigationAction
-                    onClick={() => handleRedirect(`/allCategories`)}
-                    label='Categories'
+                    onClick={() => changePath(`/categories`)}
+                    className='bottom-nav'
+                    sx={{ fontSize: "20px" }}
+                    label='categories'
+                    value="categories"
                     icon={<BiCategory />}
                 />
             </BottomNavigation>

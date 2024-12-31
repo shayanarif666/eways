@@ -20,7 +20,7 @@ Carousel Dots Styling
 
 @media (max-width: 650px) {
     .carousel-slider-img img {
-        height: 400px;
+        height: 250px;
         object-fit: cover;
     }
 }

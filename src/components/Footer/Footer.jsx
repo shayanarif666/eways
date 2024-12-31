@@ -95,7 +95,7 @@ const Footer = () => {
                 <hr className="border-gray-700 my-5" />
 
                 {/* Footer Bottom */}
-                <div className="sm:flex justify-between items-center">
+                <div className="sm:flex justify-between items-center sm:pb-0 pb-10">
                     <p className="text-sm">Copyright © 2024 Eways.pk. All rights reserved.</p>
                     <div className="flex space-x-3 sm:mt-0 mt-2">
                         <img src={cashapp} alt="CashApp" className="h-6" />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Card, CardMedia } from "@mui/material"
 import { Link } from 'react-router-dom';
 import './css/product.css';
@@ -10,8 +10,12 @@ function ProductCard({
     product,
     isDescription = "",
     className = "",
+    extraClasses = "",
     ...props
 }) {
+
+    // State Variables
+    const [images, setImages] = useState([]);
 
     // Get User Data
     const { userData, token } = useSelector((state) => state.auth);
@@ -32,23 +36,25 @@ function ProductCard({
             console.log(error);
         }
     }
-    
+
     // Discount Percentage
     const calculateDiscountedPrice = (newPrice, oldPrice) => {
         const discountedPrice = ((oldPrice - newPrice) / oldPrice) * 100;
         return discountedPrice;
     };
 
+
+
     return (
         <div className={`card-box ${className}`}>
-            <Card className='my-2 p-3'>
-                <Link to={`/product-detail/${product.sku_id}`} style={{ textDecoration: "none", color: "#333" }}>
+            <Card className={`my-2 p-3`}>
+                <Link to={`/product-detail/${product.sku_id}`} className={`bg-red-300`} style={{ textDecoration: "none", color: "#333" }}>
                     <div className='card-img'>
                         <CardMedia
                             component="img"
-                            height="150"
                             loading='lazy'
-                            image={product.imgPath ? product.imgPath : "https://qne.com.pk/cdn/shop/files/orgsize_48450WhatsApp_Image_2024-11-28_at_12.41.23_PM-removebg-preview.png?v=1732876894"}
+                            style={{ height: "225px" }}
+                            image={product.imgPath ? `https://admin.almehdisolutions.com/${product.imgPath}` : "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"}
                         />
                         <div className="badge-save bg-red-100 text-red-600">
                             <em>Save {product.new_price > 0 ? calculateDiscountedPrice(product.new_price, product.old_price).toFixed(2) : ""}%</em>

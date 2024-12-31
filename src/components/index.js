@@ -29,6 +29,7 @@ import OrderHistoryItems from "./Orders/OrderHistoryItems";
 import Products from "./Products/Products";
 import ProductCard from "./Products/ProductCard";
 import ProductDetail from "./Single Product/ProductDetails";
+import ProductVendor from "./Single Product/ProductVendor";
 import ProductDetailLoader from "./Loader/ProductDetailLoader";
 import ProfileSidebar from "./Profile/ProfileSidebar";
 import ProfileTabs from "./Profile/ProfileTabs";
@@ -78,6 +79,7 @@ export {
     Products,
     ProductCard,
     ProductDetail,
+    ProductVendor,
     ProductDetailLoader,
     ProfileSidebar,
     ProfileTabs,

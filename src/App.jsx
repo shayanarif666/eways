@@ -63,7 +63,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<HomePage />} />
-        <Route path='/allCategories' element={<CategoriesPage />} />
+        <Route path='/categories' element={<CategoriesPage />} />
         <Route path='/products/:key' element={<FilteredProductsPage />} />
         <Route path='/product-detail/:id' element={<ProductDetailsPage />} />
         <Route element={<IsAuth />}>

@@ -11,7 +11,7 @@ function CartItems({ item, quantity, onQuantity, onRemoveProduct }) {
                     <img
                         alt={"image"}
                         src={false ? item.sku.imgPath: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
-                        style={{ width: '100%', height: '150px' }} 
+                        style={{ width: '100%', height: '150px', objectFit: "cover" }} 
                     />
                 </Grid>
                 <Grid item xs={8}>

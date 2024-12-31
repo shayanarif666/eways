@@ -79,7 +79,7 @@ function Navbar() {
         <nav className='navbar pt-10' id='navbar'>
             <div className="xl:container container-fluid d-block">
                 <div className="row flex items-center" style={{ marginTop: "-2.3rem" }}>
-                    <div className="logo-area col-lg-2 col-xl-2 col-sm-4 order-1">
+                    <div className="logo-area col-lg-2 col-xl-2 col-sm-4 col-6 order-1">
                         <Logo filter="brightness(0) invert(1)" />
                     </div>
                     <div className="search-bar col-lg-5 col-xl-6 m-auto order-lg-2 order-3 sm:py-0 py-2">
@@ -95,25 +95,25 @@ function Navbar() {
                             <SearchResults updateSearch={setSearch} searchValue={search} products={searchProducts} />
                         </div>
                     </div>
-                    <div className="menu-items col-lg-5 col-xl-4 ms-auto border-green-700 col-8 order-lg-3 order-2 sm:block hidden">
+                    <div className="menu-items col-lg-5 col-xl-4 ms-auto border-green-700 col-6 order-lg-3 order-2 sm:block">
                         <div className="d-flex align-items-center justify-content-end">
-                            <Link to={`/wishlist/${2}`} className="d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
-                                <IoMdHeartEmpty className='text-3xl text-white font-bold me-2' />
-                                <div className="info text-center md:block hidden">
+                            <Link to={`/wishlist/${2}`} className="d-flex align-items-center rounded-full hover:cursor-pointer py-1 sm:px-2 transition-all duration-200 ease-in-out">
+                                <IoMdHeartEmpty className='sm:text-3xl text-2xl text-white font-bold me-2' />
+                                <div className="info text-center sm:block hidden">
                                     <h6 className='text-white'>Reorder</h6>
                                     <span className='text-white font-bold font-sans'>My Items</span>
                                 </div>
                             </Link>
-                            <Link to={`${token ? "/profile/2" : "/login"}`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 px-2 transition-all duration-200 ease-in-out">
-                                <FaRegUser className='text-2xl text-white font-bold me-2' />
-                                <div className="info text-center md:block hidden">
+                            <Link to={`${token ? "/profile/2" : "/login"}`} className="md:mx-6 d-flex align-items-center rounded-full hover:cursor-pointer py-1 sm:px-2 transition-all duration-200 ease-in-out">
+                                <FaRegUser className='sm:text-2xl text-xl text-white font-bold me-2' />
+                                <div className="info text-center sm:block hidden">
                                     <h6 className='text-white'>{token ? `${userData.first_name}` : "Sign In"}</h6>
                                     <span className='text-white font-bold font-sans'>Account</span>
                                 </div>
                             </Link>
-                            <Link to={`/cart/${15}`} className="hover:cursor-pointer py-1 px-2 rounded-full transition-all duration-200 ease-in-out">
+                            <Link to={`/cart/${15}`} className="hover:cursor-pointer py-1 sm:px-2 rounded-full transition-all duration-200 ease-in-out">
                                 <button className='relative'>
-                                    <LuShoppingCart className='text-3xl text-white font-bold m-auto' />
+                                    <LuShoppingCart className='sm:text-3xl text-2xl text-white font-bold m-auto mt-1' />
                                     {
                                         token ?
                                             <span
@@ -127,7 +127,7 @@ function Navbar() {
                                     }
 
                                 </button>
-                                <h6 className='text-white mt-1 md:block hidden'>Cart</h6>
+                                <h6 className='text-white mt-1 sm:block hidden'>Cart</h6>
                             </Link>
                         </div>
                     </div>

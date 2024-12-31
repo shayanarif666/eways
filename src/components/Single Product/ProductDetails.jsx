@@ -9,7 +9,7 @@ import { MdOutlineNotInterested, MdNavigateNext } from "react-icons/md";
 import ProductCard from '../Products/ProductCard';
 import toast, { Toaster } from 'react-hot-toast';
 import productService from '../../services/productService';
-import { ProductDetailLoader, ReviewForm, ReviewsAndRatings } from '../index';
+import { ProductDetailLoader, ProductVendor } from '../index';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -29,6 +29,7 @@ function ProductDetail() {
     const [loading, setLoading] = useState(true);
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(0);
+    const [images, setImages] = useState([]);
     const [quantity, setQuantity] = useState(1);
     const [isProductCart, setIsProductCart] = useState(false);
     const [cart, setCart] = useState([]);
@@ -40,9 +41,12 @@ function ProductDetail() {
         setLoading(true);
         try {
             const data = await productService.getProduct(id);
+            const images = data.imgPath?.split(",")
             setProduct(data);
+            setImages(images);
             setLoading(false);
             console.log(data)
+            console.log("images", images, images.length, images[0])
         } catch (error) {
             console.log(error)
             setLoading(false);
@@ -122,7 +126,7 @@ function ProductDetail() {
                         aria-label="breadcrumb">
                         <Typography style={{ fontSize: ".9rem" }} color="#999">Home</Typography>
                         <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.product.relatedProduct[0].category_name}</Typography>
-                        <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.title}</Typography>
+                        <Typography style={{ fontSize: ".9rem" }} color="#999">{product && product.title?.slice(0, 30)}...</Typography>
                     </Breadcrumbs>
                 </div>
 
@@ -136,19 +140,19 @@ function ProductDetail() {
                                 <Grid item xs={12} md={5} lg={7} sx={{ pr: 3 }}>
                                     <CardMedia
                                         component="img"
-                                        image={product.imgPath ? product.images[selectedImage] : "https://airedalecooling.com/wp-content/uploads/2017/07/runner-air-con-maintenance.png"}
+                                        image={images.length > 0 ? `https://admin.almehdisolutions.com/${images[selectedImage]}` : "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"}
                                         alt="Product Image"
-                                        sx={{ mb: 2, height: "600px", objectFit: 'contain' }}
+                                        sx={{ mb: 2, height: "500px", objectFit: "contain" }}
                                     />
 
                                     <Divider style={{ backgroundColor: "#ddd", marginTop: "-.5rem" }} />
 
                                     <Grid container spacing={2} sx={{ pt: 2 }}>
-                                        {product.images?.map((image, index) => (
+                                        {images.length > 0 && images.map((image, index) => (
                                             <Grid item key={image}>
                                                 <CardMedia
                                                     component="img"
-                                                    image={image}
+                                                    image={`https://admin.almehdisolutions.com/${image}`}
                                                     className='xl:w-36 xl:h-36 w-20 h-20'
                                                     alt="Product Thumbnail"
                                                     sx={{ cursor: "pointer" }}
@@ -292,114 +296,10 @@ function ProductDetail() {
 
                             </Grid>
 
-                            <div className="row mt-4 g-4">
+                            {/* Product Information Vendors */}
+                            <ProductVendor product={product} />
 
-                                <ul class="nav nav-pills justify-content-center mb-3" id="pills-tab" role="tablist">
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Overview</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-description" type="button" role="tab" aria-controls="pills-description" aria-selected="false">Description</button>
-                                    </li>
-                                    <li class="nav-item" role="presentation">
-                                        <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Reviews</button>
-                                    </li>
-                                </ul>
-                                <Divider className='bg-gray-400' sx={{ marginTop: "-1rem" }} />
-                                <div class="tab-content text-center mb-5" id="pills-tabContent">
-                                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-                                        <div className="item-detail p-4">
-
-                                            <div className="flex items-center justify-around">
-                                                <div className="d-flex align-items-center">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Product Dimension :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.width} x {product.length}</span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Weight :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.weight} Kilogram</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex items-center justify-around">
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Modal :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.model}</span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Created Product :</span>
-                                                    {/* <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.meta.createdAt.replace("T", " ").slice(0, 10)}</span> */}
-                                                </div>
-                                            </div>
-
-                                            <div className="flex items-center justify-around">
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Minimum Item Quantity :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>1 Piece</span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Maximum Item Quantity :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>5 Pieces</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex items-center justify-around">
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>SKU :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.sku_name}</span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Vendor :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.vendor_id}</span>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex items-center justify-around">
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Promotion Code :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.promotion}</span>
-                                                </div>
-
-                                                <div className="d-flex align-items-center mt-4">
-                                                    <span className='font-semibold' style={{ fontSize: ".9rem" }}>Condition :</span>
-                                                    <span className='ms-2' style={{ fontSize: ".9rem" }}>{product.condition}</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab" tabindex="0">
-                                        <div className="item-detail p-4">
-                                            <div className='d-flex align-items-center'>
-                                                <p className='text-md text-gray-700 ms-2'>{product.description}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-                                        <div className="reviews p-4">
-                                            <h2 className='text-2xl text-start text-gray-500'>Customer Reviews</h2>
-
-                                            <Divider sx={{ marginTop: "1rem", backgroundColor: "#ccc" }} />
-
-                                            <ReviewsAndRatings product={product} />
-
-                                            <div className="review-form my-8 text-start">
-                                                <h4 className='uppercase text-black font-semibold text-sm'>You're Reviewing</h4>
-                                                <h5 className='mt-1 uppercase text-black font-semibold text-sm'>{product.title}</h5>
-                                            </div>
-
-                                            <ReviewForm productId={product.product_id} skuId={product.id} />
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-
+                            {/* Similar Products */}
                             <Grid spacing={4} className='my-5'>
 
                                 <h4 className='text-xl font-semibold'>Related Products</h4>
@@ -412,6 +312,7 @@ function ProductDetail() {
                                     navigation
                                     pagination={{ clickable: true }}
                                     breakpoints={{
+                                        0: { slidesPerView: 1 },
                                         400: { slidesPerView: 1 },
                                         576: { slidesPerView: 2 },
                                         768: { slidesPerView: 3 },

@@ -193,7 +193,7 @@ function FilterProducts() {
 
                         {
                             filteredProducts.length > 0 ? filteredProducts.map((product, id) => (
-                                <ProductCard product={product} className="col-sm-6 col-md-4 col-xl-3 col-lg-6 col-xl-4 col-xxl-3 col-12" isDescription={true} />
+                                <ProductCard product={product} extraClasses={'bg-red-100 me-2 shadow'} className="col-sm-6 col-md-4 col-xl-3 col-lg-6 col-xl-4 col-xxl-3 col-12" isDescription={true} />
                             ))
                                 : <p className='text-center'>Sorry No Products Found</p>
                         }

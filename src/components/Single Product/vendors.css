@@ -1,0 +1,9 @@
+@media (max-width: 400px) {
+    .vendor-row ul {
+        display: block !important;
+    }
+
+    .vendor-row ul li button {
+        width: 100% !important;
+    }
+}
