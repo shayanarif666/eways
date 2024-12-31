@@ -1,11 +1,6 @@
 export class OrderService {
     constructor() { }
 
-    // Get Order By User
-    async getOrdersByUser(userID) {
-
-    }
-
     // Add Order
     async addOrder(order, token) {
         console.log(order, token)
