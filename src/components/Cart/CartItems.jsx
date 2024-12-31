@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Grid, Typography } from '@mui/material';
 import { Toaster } from 'react-hot-toast';
 import cartService from '../../services/cartService';
 
 function CartItems({ item, quantity, onQuantity, onRemoveProduct }) {
+    
+    // State Variables
+    const [images, setImages] = useState([]);
+
+    useEffect(() => {
+        const images = item.sku.imgPath.split(",");
+        setImages(images);
+        console.log("path", images[0])
+    }, [])
+
     console.log(item)
     return (
         <>
@@ -11,7 +21,7 @@ function CartItems({ item, quantity, onQuantity, onRemoveProduct }) {
                 <Grid item xs={3} className='me-4'>
                     <img
                         alt={"image"}
-                        src={item.sku.imgPath ? `https://admin.almehdisolutions.com/${item.sku.imgPath}`: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
+                        src={item.sku.imgPath ? `https://admin.almehdisolutions.com/${images[0]}`: "https://qne.com.pk/cdn/shop/files/orgsize_25679golden_20sun.png?v=1732019447"}
                         style={{ width: '100%', height: '150px', objectFit: "cover" }} 
                     />
                 </Grid>
