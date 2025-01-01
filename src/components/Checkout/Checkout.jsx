@@ -163,12 +163,12 @@ function Checkout() {
                             <div className="cart-prod mb-10">
                                 {
                                     cart && cart.map((product) => {
-                                        console.log("checkout", product)
+                                        const images = product.sku.imgPath.split(",");
                                         return (
                                             <>
                                                 <div className='flex items-center'>
                                                     <img
-                                                        src={`${product.sku.imgPath ? `https://admin.almehdisolutions.com/${product.sku.imgPath}` : "https://qne.com.pk/cdn/shop/files/orgsize_484551280797-1.jpg?v=1733728810"}`}
+                                                        src={`${product.sku.imgPath ? `https://admin.almehdisolutions.com/${images[0]}` : "https://qne.com.pk/cdn/shop/files/orgsize_484551280797-1.jpg?v=1733728810"}`}
                                                         className='w-20 h-20'
                                                         alt=""
                                                     />
