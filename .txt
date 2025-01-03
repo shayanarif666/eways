@@ -1,0 +1,17 @@
+MuiButtonBase-root 
+MuiPaginationItem-root 
+MuiPaginationItem-sizeSmall 
+MuiPaginationItem-outlined 
+MuiPaginationItem-rounded 
+Mui-selected 
+MuiPaginationItem-page 
+css-1na8ka6
+
+MuiButtonBase-root 
+MuiPaginationItem-root 
+MuiPaginationItem-sizeSmall 
+MuiPaginationItem-outlined 
+MuiPaginationItem-rounded 
+Mui-selected 
+MuiPaginationItem-page 
+css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root

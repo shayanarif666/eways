@@ -7,25 +7,25 @@
     flex-wrap: nowrap !important;
 }
 
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root {
+.pagination .MuiPagination-ul li button  {
     margin: 0 .3rem;
     border-color: #999;
     border-radius: 0%;
 }
 
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root:hover {
+.pagination .MuiPaginationItem-page :hover {
     border-color: #b62026;
     color: #b62026 !important;
     background: none !important;
 }
 
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected {
+.pagination .MuiPaginationItem-page.Mui-selected {
     background-color: #b62026;
     color: #fff;
     border-color: #b62026;
 }
 
-.pagination .css-1s5gl6l-MuiButtonBase-root-MuiPaginationItem-root.Mui-selected:hover {
+.pagination .MuiPaginationItem-page.Mui-selected:hover {
     background-color: #b30006 !important;
     color: #fff !important;
     border-color: #b30006 !important;
