@@ -33,7 +33,7 @@ function Products({
             setGCategories(getCategories);
             setLoadState(false);
 
-            console.log("products fetching", products[0]?.category_name, gCategories[0].name)
+
         } catch (error) {
             setLoadState(false);
         }
@@ -52,28 +52,34 @@ function Products({
 
             {gCategories?.map(({ name, id }) => (
                 <div key={id} style={{ marginBottom: '20px' }}>
-                    <div className="row flex items-center justify-between">
-                        <div className="col-lg-3 col-md-4 col-8">
-                            <h4
-                                className='text-xl font-semibold text-black mb-2 font-bold'
-                                style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif" }}
-                            >
-                                {name}
-                            </h4>
-                        </div>
-                        <div className="col-lg-6 col-md-5 md:block hidden">
-                            <Divider sx={{ backgroundColor: "#aaa" }} />
-                        </div>
-                        <div className="col-md-3 text-end col-4">
-                            <Link
-                                to={`/products/${id}`}
-                                className='btn text-sm rounded-none text-white'
-                                style={{ backgroundColor: "#b62026" }}
-                            >
-                                View All
-                            </Link>
-                        </div>
-                    </div>
+                    {
+                        gProducts && gProducts.find((prod) => prod.category_name === name) ?
+                            <div className="row flex items-center justify-between">
+                                <div className="col-lg-3 col-md-4 col-8">
+                                    <h4
+                                        className='text-xl font-semibold text-black mb-2 font-bold'
+                                        style={{ fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif" }}
+                                    >
+                                        {name}
+                                    </h4>
+                                </div>
+                                <div className="col-lg-6 col-md-5 md:block hidden">
+                                    <Divider sx={{ backgroundColor: "#aaa" }} />
+                                </div>
+                                <div className="col-md-3 text-end col-4">
+                                    <Link
+                                        to={`/products/${id}`}
+                                        className='btn text-sm rounded-none text-white'
+                                        style={{ backgroundColor: "#b62026" }}
+                                    >
+                                        View All
+                                    </Link>
+                                </div>
+                            </div>
+                            :
+                            <></>
+                    }
+
                     <Swiper
                         modules={[Navigation]}
                         slidesPerView={6}

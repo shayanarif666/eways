@@ -75,7 +75,7 @@ function Navbar() {
 
     useEffect(() => {
         fetchCartData();
-    }, [update])
+    }, [])
 
     return (
         <nav className='navbar pt-10' id='navbar'>
