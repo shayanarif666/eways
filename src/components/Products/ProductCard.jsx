@@ -53,7 +53,7 @@ function ProductCard({
                         <CardMedia
                             component="img"
                             loading='lazy'
-                            style={{ height: "225px" }}
+                            style={{ height: "225px", width: "100%", objectFit: "contain" }}
                             image={product.imgPath ? `https://admin.almehdisolutions.com/${product.imgPath}` : "https://www.shutterstock.com/image-vector/default-ui-image-placeholder-wireframes-600nw-1037719192.jpg"}
                         />
                         <div className="badge-save bg-red-100 text-red-600">

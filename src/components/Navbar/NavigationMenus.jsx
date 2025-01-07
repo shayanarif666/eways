@@ -1,9 +1,6 @@
-import React from 'react'
-import Categories from '../Categories Listing/Categories'
-import { Link } from 'react-router-dom'
-import { Divider } from '@mui/material'
-import { BiCategory } from 'react-icons/bi'
-import { IoIosArrowDown } from 'react-icons/io'
+import React from 'react';
+import Categories from '../Categories Listing/Categories';
+import { Link } from 'react-router-dom';
 
 function NavigationMenus() {
 
@@ -22,7 +19,7 @@ function NavigationMenus() {
 
   return (
     <>
-      <div className="navigation-menus bg-white shadow-sm">
+      <div className="navigation-menus bg-white shadow-sm" style={{ marginTop: "-.5rem !important" }}>
         <div className="container">
           <div className="flex items-center">
             <div className="categories px-2 me-4" style={{ backgroundColor: "#2557aa" }}>
