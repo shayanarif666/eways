@@ -19,7 +19,7 @@ function NavigationMenus() {
 
   return (
     <>
-      <div className="navigation-menus bg-white shadow-sm" style={{ marginTop: "-.5rem !important" }}>
+      <div className="navigation-menus bg-white shadow-sm" style={{ marginTop: "-3rem !important" }}>
         <div className="container">
           <div className="flex items-center">
             <div className="categories px-2 me-4" style={{ backgroundColor: "#2557aa" }}>

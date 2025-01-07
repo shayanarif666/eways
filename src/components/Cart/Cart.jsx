@@ -15,10 +15,8 @@ function Cart() {
     const [quantity, setQuantity] = useState(1);
     const [isRemove, setIsRemove] = useState(false);
 
-    // Get Id Params
-    const { userId } = useParams();
-
     const { token } = useSelector((state) => state.auth);
+    const [update, setUpdate] = useState(false);
 
     // Get Cart Data
     const fetchCartData = async () => {
@@ -66,6 +64,7 @@ function Cart() {
             setTimeout(() => {
                 setIsRemove((prevVal) => !prevVal);
             }, 1800);
+            setUpdate("updated")
         } catch (error) {
             console.log(error);
         }
@@ -73,7 +72,7 @@ function Cart() {
 
     useEffect(() => {
         fetchCartData();
-    }, [quantity, isRemove])
+    }, [quantity, isRemove, update])
 
     return (
         <>

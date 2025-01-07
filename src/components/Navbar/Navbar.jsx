@@ -17,7 +17,7 @@ function Navbar() {
     // State Variables
     const [search, setSearch] = useState("");
     const [searchProducts, setSearchProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [length, setLength] = useState(0);
     const [update, setUpdate] = useState(false);
 
     // Navigate User
@@ -62,20 +62,19 @@ function Navbar() {
         debouncedSearch(searchValue);
     };
 
-    // Get Carts Length
     const fetchCartData = async () => {
         try {
-            const carts = await cartService.getCart(token) || {};
-            setCart(carts);
-            setUpdate(!update)
+            const userCart = await cartService.getCart(token);
+            setLength(userCart?.length);
+            console.log("running")
         } catch (error) {
-            console.log(error);
+            console.log(error)
         }
     }
 
     useEffect(() => {
-        fetchCartData();
-    }, [])
+        fetchCartData()
+    }, [length])
 
     return (
         <nav className='navbar pt-10' id='navbar'>
@@ -122,7 +121,7 @@ function Navbar() {
                                                 class="font-extrabold position-absolute top-0 start-100 translate-middle p-2.5 bg-white w-1 h-1 flex items-center justify-center rounded-full text-red-700 text-xs"
                                                 style={{ paddingBottom: "-2rem" }}
                                             >
-                                                {cart.length || 0} 
+                                                {length}
                                             </span>
                                             :
                                             <></>

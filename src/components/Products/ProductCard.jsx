@@ -43,8 +43,6 @@ function ProductCard({
         return discountedPrice;
     };
 
-
-
     return (
         <div className={`card-box ${className}`}>
             <Card className={`my-2 p-3`}>
